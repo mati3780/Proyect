@@ -1,0 +1,496 @@
+﻿
+<uib-tabset active="activeJustified" justified="true">
+	<uib-tab index="0" heading="Datos del inmueble">
+		<br />
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Ubicación del inmueble</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="ubicacioninmueble"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['UbicacionInmueble'].Condicion" required
+						        ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones"
+                                ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['UbicacionInmueble'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.ubicacioninmueble.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="ubicacioninmueblelabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['UbicacionInmueble'].Condicion == 1 ||
+											datosTramiteCtrl.datoTramite.InmuebleDatos['UbicacionInmueble'].Condicion == 2"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['UbicacionInmueble'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['UbicacionInmueble'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.ubicacioninmueblelabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.ubicacioninmueblelabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Matrícula</label>
+					<div class="col-sm-8">
+					    <select class="form-control" name="matricula"
+					            ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Matricula'].Condicion" required
+					            ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondicionesObligatorias"
+                                  ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['Matricula'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.matricula.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="matriculalabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['Matricula'].Condicion == 1"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['Matricula'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Matricula'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.matriculalabel.$error.required">Este campo es obligatorio.</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.matriculalabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Tomo y Folio</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="tomofolio"
+						        ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['TomoFolio'].Condicion" required
+						        ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondicionesObligatorias"
+                                 ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['TomoFolio'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.tomofolio.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="tomofoliolabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['TomoFolio'].Condicion == 1"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['TomoFolio'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['TomoFolio'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.tomofoliolabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.tomofoliolabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</uib-tab>
+
+	<uib-tab index="1" heading="Zona">
+		<br />
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Zona / Código partido / Departamento</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="zona"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Zona'].Condicion" required
+						        ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones"
+                                 ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['Zona'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.zona.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="zonalabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['Zona'].Condicion == 1 ||
+											datosTramiteCtrl.datoTramite.InmuebleDatos['Zona'].Condicion == 2"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['Zona'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Zona'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.zonalabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.zonalabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Lote / Chacra / Quinta</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="lote"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Lote'].Condicion" required
+						        ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones"
+                                ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['Lote'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.lote.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="lotelabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['Lote'].Condicion == 1 ||
+											datosTramiteCtrl.datoTramite.InmuebleDatos['Lote'].Condicion == 2"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['Lote'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Lote'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.lotelabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.lotelabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Manzana</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="manzana"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Manzana'].Condicion" required
+						        ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones"
+                                ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['Manzana'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.manzana.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="manzanalabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['Manzana'].Condicion == 1 ||
+											datosTramiteCtrl.datoTramite.InmuebleDatos['Manzana'].Condicion == 2"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['Manzana'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Manzana'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.manzanalabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.manzanalabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Legajo / Padrón</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="legajo"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Legajo'].Condicion" required
+						        ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones"
+                                ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['Legajo'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.legajo.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="legajolabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['Legajo'].Condicion == 1 ||
+											datosTramiteCtrl.datoTramite.InmuebleDatos['Legajo'].Condicion == 2"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['Legajo'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Legajo'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.legajolabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.legajolabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Superficie</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="superficie"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Superficie'].Condicion" required
+						        ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones"
+                                ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['Superficie'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.superficie.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="superficielabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['Superficie'].Condicion == 1 ||
+											datosTramiteCtrl.datoTramite.InmuebleDatos['Superficie'].Condicion == 2"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['Superficie'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['Superficie'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.superficielabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.superficielabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Unidad de medida</label>
+					<div class="col-sm-8">
+					    <select class="form-control" name="unidadmedida"
+					            ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadMedida'].Condicion" required
+					            ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones"
+                                ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadMedida'])">
+					        <option value=""></option>
+					    </select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.unidadmedida.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="unidadmedidalabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadMedida'].Condicion == 1 ||
+											datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadMedida'].Condicion == 2"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadMedida'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadMedida'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.unidadmedidalabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.unidadmedidalabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Unidad Funcional / Complementaria / Polígono</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="unidadfuncional"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadFuncional'].Condicion" required
+						        ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones"
+                                ng-change="datosTramiteCtrl.clearInputs(datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadFuncional'])">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.unidadfuncional.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="unidadfuncionallabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadFuncional'].Condicion == 1 ||
+											datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadFuncional'].Condicion == 2"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadFuncional'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['UnidadFuncional'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.unidadfuncionallabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.unidadfuncionallabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</uib-tab>
+
+	<uib-tab index="2" heading="Nomenclatura catastral">
+		<br />
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Circunscripción / Localidad (C/Loc)</label>
+					<div class="col-sm-8">
+					    <select class="form-control" name="circunscripcion"
+					            ng-change="datosTramiteCtrl.catastroChanged(datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralCircunscripcion'])"
+					            ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralCircunscripcion'].Condicion" required
+					            ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones">
+                            <option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.circunscripcion.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="circunscripcionlabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralCircunscripcion'].Condicion == 1"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralCircunscripcion'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralCircunscripcion'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.circunscripcionlabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.circunscripcionlabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Sección (S)</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="seccion"
+								ng-change="datosTramiteCtrl.catastroChanged(datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralSeccion'])"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralSeccion'].Condicion" required
+								ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.seccion.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="seccionlabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralSeccion'].Condicion == 1"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralSeccion'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralSeccion'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.seccionlabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.seccionlabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Manzana (M)</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="manzanacatastro"
+								ng-change="datosTramiteCtrl.catastroChanged(datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralManzana'])"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralManzana'].Condicion" required
+								ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.manzanacatastro.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="manzanacatastrolabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralManzana'].Condicion == 1"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralManzana'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralManzana'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.manzanacatastrolabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.manzanacatastrolabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-4 control-label">Parcela / SubParcela (P/SP)</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="parcela"
+								ng-change="datosTramiteCtrl.catastroChanged(datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralParcela'])"
+								ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralParcela'].Condicion" required
+								ng-options="condicion.Key as condicion.Value for condicion in datosTramiteCtrl.datosCondiciones">
+							<option value=""></option>
+						</select>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.parcela.$error.required">Este campo es obligatorio</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+					<label class="col-sm-3 control-label">Ayuda</label>
+					<div class="col-sm-8">
+						<input type="text" name="parcelalabel" class="form-control"
+							   ng-required="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralParcela'].Condicion == 1"
+							   ng-disabled="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralParcela'].Condicion == 3"
+							   ng-model="datosTramiteCtrl.datoTramite.InmuebleDatos['NomenclaturaCatastralParcela'].Label" maxlength="100" />
+					</div>
+					<div class="col-sm-9 col-sm-offset-3">
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.parcelalabel.$error.required">Este campo es obligatorio</p>
+						<p class="help-block" ng-if="datosTramiteCtrl.datosTramiteForm.parcelalabel.$error.maxlength">La longitud máxima es de 100 caracteres.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</uib-tab>
+</uib-tabset>

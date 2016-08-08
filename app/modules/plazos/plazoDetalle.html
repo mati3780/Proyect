@@ -1,0 +1,98 @@
+﻿<div>
+    <div ng-hide="controller.plazoInexistente">
+        <form name="controller.plazoForm" class="form-horizontal" novalidate ng-submit="controller.guardar()">
+
+            <!--DATOS TRAMITE JURISDICCION-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Datos del Trámite en la Jurisdicción</div>
+                <div class="panel-body">
+
+                    <div class="col-md-12">
+                        <!--JURISDICCION-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 text-right">Jurisdicción</label>
+                            <div class="col-sm-10">
+                                <span>{{controller.jurisdiccionDescripcion}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--TRAMITES-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 text-right">Trámite</label>
+                            <div class="col-sm-10">
+                                <span>{{controller.plazo.ServicioDescripcion}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--DATOS PLAZO TRAMITE-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Datos del Plazo para el Trámite</div>
+                <div class="panel-body">
+
+                    <div class="col-md-4">
+                        <!-- PLAZO -->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 text-right">Tipo de Plazo</label>
+                            <div class="col-sm-8">
+                                <span>{{controller.plazo.PlazoDescripcion}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!-- DIAS -->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 text-right">Plazo en Días</label>
+                            <div class="col-sm-8">
+                                <span>{{controller.plazo.PlazoDias}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!-- TASA -->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-5 text-right">Tasa Provincial</label>
+                            <div class="col-sm-7">
+                                <span>$ {{controller.plazo.Costo.toFixed(2)}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- VIGENCIA DESDE -->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 text-right">Vigencia Desde</label>
+                            <div class="col-sm-8">
+                                <span>{{controller.plazo.VigenciaDesde}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- VIGENCIA HASTA -->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 text-right">Vigencia Hasta</label>
+                            <div class="col-sm-8">
+                                <span>{{controller.plazo.VigenciaHasta}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div ng-show="controller.plazoInexistente">
+        <span class="text-danger">Plazo no encontrado.</span>
+    </div>
+    <div class="form-group">
+        <a href="#/plazos" class="btn btn-link">Volver</a>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+﻿<div class="row">
+    <div ng-show="tramiteCtrl.tramiteExiste">
+        <form name="tramiteCtrl.tramiteForm" class="form-horizontal" novalidate ng-submit="tramiteCtrl.guardar()">
+            <!--BOTONES-->
+            <div class="form-group">
+                <div class="col-sm-12 text-right">
+                    <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.documentoEnTramite()" title="Documento en trámite"
+                            ng-if="tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 2 || tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 5">Doc. en Trámite</button>
+                    <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.observar()" title="Hacer observación de los datos"
+                            ng-if="tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 2 ||tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 3 || tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 5">Observar</button>
+                    <a class="btn btn-primary" ng-href="#/jurisdiccionInformante/{{tramiteCtrl.tramite.Id}}/verPDFRechazado" title="Ver PDF Rechazado"
+                            ng-if="tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 8 || tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 9">Ver PDF Rechazado</a>
+                    <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.ingresarPdf()" title="Adjuntar el pdf al trámite"
+                            ng-if="tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 2 || tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 3 || tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 5 || tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 8 || tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 9">Ingresar PDF</button>
+                    <a class="btn btn-primary" ng-href="#/jurisdiccionInformante/{{tramiteCtrl.tramite.Id}}/verificarPDF" title="Verificar pdf adjunto al trámite"
+                            ng-if="tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 6">Verificar PDF</a>
+                </div>
+            </div>
+
+            <!--VALIDATION SUMMARY-->
+            <div class="row alert alert-danger" ng-if="tramiteCtrl.validationErrors.formErrors.length > 0">
+                <ul>
+                    <li ng-repeat="formError in tramiteCtrl.validationErrors.formErrors">
+                        <span>{{formError}}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!--TABS-->
+            <uib-tabset active="active">
+
+                <!--SOLICITANTE-->
+                <uib-tab index="0" heading="Solicitante">
+                    <div ng-include src="'app/modules/tramites/Solicitante.html'"></div>
+                </uib-tab>
+
+                <!--SOLICITUD-->
+                <uib-tab index="1" heading="Solicitud">
+                    <div ng-include src="'app/modules/tramites/Solicitud.html'"></div>
+                </uib-tab>
+
+                <!--PERSONA-->
+                <uib-tab index="2" heading="Persona" ng-if="tramiteCtrl.tramite.Entidad.Persona">
+                    <div ng-include src="'app/modules/tramites/Persona.html'"></div>
+                </uib-tab>
+
+                <!--INMUEBLE-->
+                <uib-tab index="3" heading="Inmueble" ng-if="tramiteCtrl.tramite.Entidad.Inmueble">
+                    <div ng-include src="'app/modules/tramites/Inmueble.html'"></div>
+                </uib-tab>
+
+                <!--TITULAR PESONA JURIDICA-->
+                <uib-tab index="4" heading="Titular Persona Jurídica" ng-if="tramiteCtrl.showTabTitularPersonaJuridica">
+                    <div ng-include src="'app/modules/tramites/TitularPersonaJuridica.html'"></div>
+                </uib-tab>
+
+                <!--TITULAR PERSONA FISICA-->
+                <uib-tab index="5" heading="Titular Persona Humana" ng-if="tramiteCtrl.showTabTitularPersonaFisica">
+                    <div ng-include src="'app/modules/tramites/TitularPersonaFisica.html'"></div>
+                </uib-tab>
+
+                <!--DATOS ADICIONALES-->
+                <uib-tab index="6" heading="Datos Adicionales">
+                    <div ng-include src="'app/modules/tramites/Observacion.html'"></div>
+                </uib-tab>
+
+                <!--HISTORIAL DEL TRAMITE-->
+                <uib-tab index="7" heading="Historial del Trámite">
+                    <div ng-include src="'app/modules/tramites/Historia.html'"></div>
+                </uib-tab>
+
+            </uib-tabset>
+
+            <div class="margin-bottom">
+                <!--<button type="submit" class="btn btn-primary">Registrar Trámite</button>-->
+                <a href="#/jurisdiccionInformante" class="btn btn-link">Atrás</a>
+            </div>
+
+        </form>
+    </div>
+    <div ng-show="tramiteCtrl.tramiteInexistente">
+        <span class="text-danger">Trámite no encontrado.</span>
+    </div>
+</div>
+<!--MODAL OBSERVAR-->
+<script type="text/ng-template" id="ModalObservar.html">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">{{observarCtrl.tituloObservacion}}</h4>
+    </div>
+    <div class="modal-body">
+        <div ng-include src="'app/modules/jurisdiccioninformante/Observar.html'"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="observarCtrl.aceptarObservar()">Aceptar</button>
+        <button type="button" class="btn btn-default" ng-click="observarCtrl.cancelarObservar()">Cancelar</button>
+    </div>
+</script>
+<!--MODAL ADJUNTAR PDF-->
+<script type="text/ng-template" id="ModalIngresarPDF.html">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">Ingresar PDF</h4>
+    </div>
+    <div ng-include src="'app/modules/jurisdiccioninformante/IngresarPDF.html'"></div>
+</script>

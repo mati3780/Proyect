@@ -1,0 +1,78 @@
+﻿<div>
+    <!--BUSCAR-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Buscar Depósitos y Acreditaciones</div>
+            <div class="panel-body">
+                <form class="form-horizontal" ng-submit="depositosCtrl.buscar()">
+                    <div class="col-md-3">
+                        <!--FECHA DESDE-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-6 control-label">Límite Desde</label>
+                            <div class="col-sm-6">
+                                <input type="datetime" class="form-control" placeholder="Límite Deposito Desde" datetime-picker ng-model="depositosCtrl.filtro.FechaDesde" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--FECHA HASTA-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-6 control-label">Límite Hasta</label>
+                            <div class="col-sm-6">
+                                <input type="datetime" class="form-control" placeholder="Límite Deposito Hasta" datetime-picker ng-model="depositosCtrl.filtro.FechaHasta" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--MOVIMIENTO-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label">Movimiento</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="movimiento" ng-model="depositosCtrl.filtro.Movimiento">
+                                    <option value=""></option>
+                                    <option value="2">Depósito</option>
+                                    <option value="1">Acreditación</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <!--PAGO-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label">Estado Pago</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="estadoPago" ng-model="depositosCtrl.filtro.Pago">
+                                    <option value=""></option>
+                                    <option value="1">Pago</option>
+                                    <option value="2">No Pago</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group form-group-sm text-right">
+                            <button type="submit" class="btn btn-primary" busy="<i class='fa fa-spinner fa-spin'></i> Buscando..." busy-disabled="true"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6" access="ListarDepositosAcreditacionesFiltroJurisdicciones">
+                        <!--JURISDICCIONES-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Jurisdicción</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="jurisdiccion" ng-model="depositosCtrl.filtro.JurisdiccionId"
+                                        ng-options="jurisdiccion.Id as jurisdiccion.Descripcion for jurisdiccion in depositosCtrl.jurisdicciones">
+                                    <option value="">Seleccione la jurisdicción</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--GRILLA-->
+    <div class="row">
+        <table datatable="" dt-options="depositosCtrl.dtOptions" dt-columns="depositosCtrl.dtColumns" dt-instance="depositosCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>
+    </div>
+</div>

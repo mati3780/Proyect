@@ -1,0 +1,116 @@
+﻿<div>
+	<div ng-hide="controller.plazoInexistente">
+		<form name="controller.plazoForm" class="form-horizontal" novalidate ng-submit="controller.guardar()">
+			<!--VALIDATION SUMMARY-->
+			<div class="row alert alert-danger" ng-if="controller.validationErrors.formErrors.length > 0">
+				<ul>
+					<li ng-repeat="formError in controller.validationErrors.formErrors">
+						<span>{{formError}}</span>
+					</li>
+				</ul>
+			</div>
+
+			<!--DATOS TRAMITE JURISDICCION-->
+			<div class="panel panel-default">
+				<div class="panel-heading">Datos del Trámite en la Jurisdicción</div>
+				<div class="panel-body">
+
+					<div class="col-md-12">
+						<!--JURISDICCION-->
+						<div class="form-group form-group-sm">
+							<label class="col-sm-2 control-label">Jurisdicción</label>
+							<div class="col-sm-10">
+								<span>{{controller.jurisdiccion.Descripcion}}</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-12">
+						<!--TRAMITES-->
+						<div class="form-group form-group-sm" >
+							<label class="col-sm-2 control-label">Trámite</label>
+							<div class="col-sm-10">
+								<span>{{controller.plazo.ServicioDescripcion}}</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!--DATOS PLAZO TRAMITE-->
+			<div class="panel panel-default">
+				<div class="panel-heading">Datos del Plazo para el Trámite</div>
+				<div class="panel-body">
+
+					<div class="col-md-6">
+						<!-- PLAZO -->
+						<div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.PlazoId}">
+							<label class="col-sm-4 control-label">Tipo de Plazo</label>
+							<div class="col-sm-8">
+								<span>{{controller.plazo.PlazoDescripcion}}</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<!-- DIAS -->
+						<div class="form-group form-group-sm" >
+							<label class="col-sm-4 control-label">Plazo en Días</label>
+							<div class="col-sm-8">
+								<span>{{controller.plazo.PlazoDias}}</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<!-- TASA -->
+						<div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.Costo}">
+							<label class="col-sm-4 control-label">Tasa Provincial</label>
+							<div class="col-sm-8">
+								<span>$ {{controller.plazo.Costo.toFixed(2)}}</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<!-- VIGENCIA DESDE -->
+						<div class="form-group form-group-sm" >
+							<label class="col-sm-4 control-label">Vigencia Desde</label>
+							<div class="col-sm-8">
+								<span>{{controller.plazo.VigenciaDesde}}</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6" >
+						<!-- VIGENCIA HASTA -->
+						<div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.VigenciaHasta}">
+							<label class="col-sm-4 control-label">Vigencia Hasta</label>
+							<div class="col-sm-8">		
+								<input type="datetime" name="vigenciaHasta" class="form-control" placeholder="Vigencia Hasta" datetime-picker ng-model="controller.plazo.VigenciaHasta" required />
+							</div>
+							<div class="col-sm-8 col-sm-offset-4">
+								<p class="help-block" ng-if="controller.plazoForm.vigenciaHasta.$error.required">El campo Vigencia Hasta es obligatorio.</p>
+								<p class="help-block" ng-if="controller.plazoForm.vigenciaHasta.$error.datetime">El campo Vigencia Hasta es inválido. Solo se permiten fechas.</p>
+								<span class="help-block" ng-if="controller.validationErrors.elementErrors.VigenciaHasta" ng-repeat="error in controller.validationErrors.elementErrors.VigenciaHasta">
+									{{error}}
+								</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Guardar</button>
+				<a href="#/plazos" class="btn btn-link">Cancelar</a>
+			</div>
+
+		</form>
+	</div>
+	<div ng-show="controller.plazoInexistente">
+		<span class="text-danger">Plazo no encontrado.</span>
+	</div>
+</div>

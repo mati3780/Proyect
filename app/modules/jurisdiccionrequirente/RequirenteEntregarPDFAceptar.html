@@ -1,0 +1,22 @@
+﻿<form name="requirenteEntregarPDFAceptarCtrl.requirenteEntregarPDFAceptarForm" class="form-horizontal" novalidate ng-submit="requirenteEntregarPDFAceptarCtrl.aceptar()">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">Aceptar Entrega de PDF</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <!--OBSERVACION-->
+            <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+                <div class="col-sm-12">
+                    <textarea name="observacion" rows="4" class="form-control" ng-model="requirenteEntregarPDFAceptarCtrl.Observacion" maxlength="1000"></textarea>
+                </div>
+                <div class="col-sm-12">
+                    <p class="help-block" ng-if="requirenteEntregarPDFAceptarCtrl.requirenteEntregarPDFAceptarForm.observacion.$error.maxlength">La longitud máxima del campo es de 1000 caracteres.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+        <button type="button" class="btn btn-default" ng-click="requirenteEntregarPDFAceptarCtrl.cancelar()">Cancelar</button>
+    </div>
+</form>

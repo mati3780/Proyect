@@ -1,0 +1,339 @@
+﻿{
+  "roles": [
+    {
+      "name": "PROYECT-AdmJurisdiccion-xxxx",
+      "controllers": [
+        {
+          "name": "Jurisdicciones",
+          "actions": [ "Search", "Get", "Put" ]
+        },
+        {
+          "name": "Provincias",
+          "actions": [ ]
+        },
+        {
+          "name": "TiposEstadosAdhesiones",
+          "actions": [ ]
+        },
+        {
+          "name": "Feriados",
+          "actions": [ ]
+        },
+        {
+          "name": "CuentasBancarias",
+          "actions": [ ]
+        },
+        {
+          "name": "JurisdiccionServicioPlazo",
+          "actions": [ ]
+        },
+        {
+          "name": "JurisdiccionServicioDatos",
+          "actions": [ ]
+        },
+        {
+          "name": "Servicios",
+          "actions": [ ]
+        },
+        {
+          "name": "TipoCuentaBancaria",
+          "actions": [ ]
+        },
+        {
+          "name": "Tramites",
+          "actions": [ ]
+        },
+        {
+          "name": "TramiteEstado",
+          "actions": [ ]
+        },
+        {
+          "name": "Solicitudes",
+          "actions": [ "Search", "Get", "Put", "Report" ]
+        },
+        {
+          "name": "Liquidaciones",
+          "actions": [ ]
+        },
+        {
+          "name": "SolicitudesEstados",
+          "actions": [ ]
+        }
+        ,
+           {
+          "name": "Compensaciones",
+          "actions": [ ]
+        }
+      ],
+      "aliases": [
+        "JURISDICCION",
+        "Parametricas",
+        "ABMJurisdicciones",
+        "ModificarJurisdiccion",
+        "ABMFeriados",
+        "NuevoFeriado",
+        "ModificarFeriado",
+        "BorrarFeriado",
+        "ABMPlazos",
+        "NuevoPlazo",
+        "BorrarPlazo",
+        "ABMCuentaBancarias",
+        "NuevaCuentaBancaria",
+        "ModificarCuentaBancaria",
+        "BorrarCuentaBancaria",
+        "ABMDatosTramites",
+        "NuevoDatoTramite",
+        "ModificarDatoTramite",
+        "BorrarDatoTramite",
+        "TramitesJurisdiccionInformante",
+        "ConsultorTramites",
+        "OperarDepositosAcreditaciones",
+        "ListarDepositosAcreditaciones",
+        "ActualizarDepositoAcreditacion",
+        "RegistrarTramites",
+        "RegistrarTramite",
+        "TramitesJurisdiccionesInformantes",
+        "ImprimirSolicitud",
+        "ListarTramitesJurisdiccionRequirente",
+        "RequirenteResponderTramite",
+        "ListarTramitesJurisdiccionInformante",
+        "InformanteResponderTramite",
+        "ImprimirSolicitudJurisdiccionInformante",
+        "ListarCompensaciones"
+      ]
+    },
+    {
+      "name": "PROYECT-AdmPROYECT-xxxx",
+      "controllers": [
+        {
+          "name": "Jurisdicciones",
+          "actions": [ ]
+        },
+        {
+          "name": "Feriados",
+          "actions": [ ]
+        },
+        {
+          "name": "Provincias",
+          "actions": [ ]
+        },
+        {
+          "name": "TiposEstadosAdhesiones",
+          "actions": [ ]
+        },
+        {
+          "name": "Auditoria",
+          "actions": [ ]
+        },
+        {
+          "name": "ContribucionesProyect",
+          "actions": [ ]
+        },
+        {
+          "name": "Tramites",
+          "actions": [ ]
+        },
+        {
+          "name": "TramiteEstado",
+          "actions": [ ]
+        },
+        {
+          "name": "Personas",
+          "actions": [ ]
+        },
+        {
+          "name": "Solicitudes",
+          "actions": [ "Get" ]
+        },
+        {
+          "name": "Liquidaciones",
+          "actions": [ ]
+        },
+        {
+          "name": "SolicitudesEstados",
+          "actions": [ ]
+        },
+           {
+          "name": "Compensaciones",
+          "actions": [ ]
+        }
+      ],
+      "aliases": [
+        "PROYECT",
+        "Auditoria",
+        "Parametricas",
+        "ABMJurisdicciones",
+        "NuevaJurisdiccion",
+        "ModificarJurisdiccion",
+        "BorrarJurisdiccion",
+        "ABMFeriados",
+        "OperarDepositosAcreditaciones",
+        "ListarDepositosAcreditaciones",
+        "ListarDepositosAcreditacionesFiltroJurisdicciones",
+        "ActualizarDepositoAcreditacion",
+        "ABMContribucionPROYECT",
+        "NuevaContribucionPROYECT",
+        "ModificarContribucionPROYECT",
+        "ConsultorTramites",
+        "ListarCompensaciones"
+      ]
+    },
+    {
+      "name": "PROYECT-EnteCooperador-xxxx",
+      "controllers": [
+        {
+          "name": "ContribucionesProyect",
+          "actions": [ ]
+        },
+        {
+          "name": "Jurisdicciones",
+          "actions": [ ]
+        },
+        {
+          "name": "Tramites",
+          "actions": [ ]
+        },
+        {
+          "name": "TramiteEstado",
+          "actions": [ ]
+        },
+        {
+          "name": "Personas",
+          "actions": [ ]
+        },
+        {
+          "name": "Solicitudes",
+          "actions": [ "Get" ]
+        },
+        {
+          "name": "Liquidaciones",
+          "actions": [ ]
+        },
+        {
+          "name": "CuentasBancarias",
+          "actions": [ ]
+        },
+        {
+          "name": "TipoCuentaBancaria",
+          "actions": [ ]
+        },
+        {
+          "name": "SolicitudesEstados",
+          "actions": [ ]
+        },
+         {
+          "name": "Compensaciones",
+          "actions": [ ]
+        }
+
+      ],
+      "aliases": [
+        "Parametricas",
+        "OperarDepositosAcreditaciones",
+        "ListarDepositosAcreditaciones",
+        "ListarDepositosAcreditacionesFiltroJurisdicciones",
+        "ActualizarDepositoAcreditacion",
+        "ListarDepositosAcreditacionesPendientes",
+        "CompensarDepositoAcreditacionPendiente",
+        "ABMContribucionPROYECT",
+        "ConsultorTramites",
+        "ABMCuentaBancarias",
+        "NuevaCuentaBancaria",
+        "ModificarCuentaBancaria",
+        "BorrarCuentaBancaria",
+        "ListarCompensaciones"
+      ]
+    },
+    {
+      "name": "PROYECT-OperRequirente-xxxx",
+      "controllers": [
+        {
+          "name": "Tramites",
+          "actions": [ "Search", "Get", "Put", "Report" ]
+        },
+        {
+          "name": "Solicitudes",
+          "actions": [ "Search", "Get", "Put", "Report" ]
+        },
+        {
+          "name": "SolicitudesEstados",
+          "actions": [ ]
+        }
+      ],
+      "aliases": [
+        "RegistrarTramites",
+        "RegistrarTramite",
+        "TramitesJurisdiccionesInformantes",
+        "ImprimirSolicitud",
+        "ListarTramitesJurisdiccionRequirente",
+        "RequirenteResponderTramite"
+      ]
+    },
+    {
+      "name": "PROYECT-UIFOperReq-xxxx",
+      "controllers": [
+        {
+          "name": "Tramites",
+          "actions": [ "Search", "Get", "Put", "Informe" ]
+        },
+        {
+          "name": "Solicitudes",
+          "actions": [ "Search", "Get", "Put" ]
+        },
+        {
+          "name": "TiposDocumentos",
+          "actions": [ ]
+        },
+        {
+          "name": "Jurisdicciones",
+          "actions": [ "Get" ]
+        },
+        {
+          "name": "TramiteEstado",
+          "actions": [ "TipoEstados", "TipoSubEstados" ]
+        },
+        {
+          "name": "SolicitudesEstados",
+          "actions": [ ]
+        }
+      ],
+      "aliases": [
+        "RegistrarTramites",
+        "RegistrarTramite",
+        "TramitesJurisdiccionInformante",
+        "ImprimirSolicitud",
+        "ListarTramitesJurisdiccionRequirente",
+        "RequirenteResponderTramite",
+        "ConsultorTramites"
+      ]
+    },
+    {
+      "name": "PROYECT-OperInformante-xxxx",
+      "controllers": [
+        {
+          "name": "Tramites",
+          "actions": [ "Search", "Get", "Put", "Accion", "Informar", "Informe", "Report" ]
+        }
+      ],
+      "aliases": [
+        "ListarTramitesJurisdiccionInformante",
+        "InformanteResponderTramite",
+        "ImprimirSolicitudJurisdiccionInformante"
+      ]
+    },
+    {
+      "name": "PROYECT-OperVerificador-xxxx",
+      "controllers": [
+        {
+          "name": "Tramites",
+          "actions": [ "Search", "Get", "Put" ]
+        }
+      ],
+      "aliases": [
+        "ListarTramitesJurisdiccionInformante",
+        "InformanteResponderTramite",
+        "ImprimirSolicitudJurisdiccionInformante"
+      ]
+    }
+  ]
+}

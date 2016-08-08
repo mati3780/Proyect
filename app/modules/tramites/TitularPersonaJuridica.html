@@ -1,0 +1,52 @@
+﻿<div class="row margin-top">
+    <div class="col-sm-12 text-right" ng-if="tramiteCtrl.permiteRectificar">
+        <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.abrirPersonaJuridica('POST')"><i class="fa fa-plus"></i> Agregar Titular Persona Jurídica</button>
+    </div>
+    <div class="col-sm-12">
+        <!--TODO: Poner una columna para rectificar y eliimnar-->
+        <table class="table width-100">
+            <thead>
+                <tr>
+                    <th>Denominación</th>
+                    <th>CUIT</th>
+                    <th>Inscripción</th>
+                    <th>Domicilio</th>
+                    <th>Tomo</th>
+                    <th>Folio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="tramiteCtrl.tramite.Entidad.Inmueble.PersonasJuridicas.length == 0">
+                    <td colspan="7" class="text-center"><span>El trámite no posee Titular Persona Juridica</span></td>
+                </tr>
+                <tr ng-repeat="personaJuridica in tramiteCtrl.tramite.Entidad.Inmueble.PersonasJuridicas | filter:{ Borrado: false }">
+                    <td>{{personaJuridica.RazonSocial}}</td>
+                    <td>{{personaJuridica.Cuit}}</td>
+                    <td>{{personaJuridica.SociedadIGJId}}</td>
+                    <td>{{personaJuridica.Domicilio}}</td>
+                    <td>{{personaJuridica.Tomo}}</td>
+                    <td>{{personaJuridica.Folio}}</td>
+                    <td class="column-min-width-s text-right">
+                        <a ng-click="tramiteCtrl.abrirPersonaJuridica('PUT', $index)" ng-if="tramiteCtrl.permiteRectificar" class="btn btn-warning btn-sm margin-right-xs" title="Rectificar"><i class="fa fa-pencil"></i></a>
+                        <a ng-click="tramiteCtrl.abrirPersonaJuridica('DELETE', $index)" ng-if="tramiteCtrl.permiteRectificar" class="btn btn-danger btn-sm" title="Borrar"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--MODAL PERSONA JURIDICA-->
+<script type="text/ng-template" id="ModalPersonaJuridica.html">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">Persona Jurídica</h4>
+    </div>
+    <div class="modal-body">
+        <div ng-include src="'app/modules/tramites/PersonaJuridica.html'"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="personaJuridicaCtrl.aceptarPersonaJuridica()">Aceptar</button>
+        <button type="button" class="btn btn-default" ng-click="personaJuridicaCtrl.cancelarPersonaJuridica()">Cancelar</button>
+    </div>
+</script>

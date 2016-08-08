@@ -1,0 +1,75 @@
+﻿<div class="form-horizontal">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Trámites disponibles para su jurisdicción
+		</div>
+		<div class="panel-body">
+
+			<div class="col-sm-12">
+				<!--JURISDICCION-->
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">Jurisdicción</label>
+					<div class="col-sm-10">
+						<span>{{verDatosTramiteCtrl.jurisdiccion.Descripcion}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12">
+				<!--TRAMITES-->
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">Tipo de trámite</label>
+					<div class="col-sm-8">
+						<span>{{verDatosTramiteCtrl.datoTramite.ServicioDescripcion}}</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<uib-tabset active="activeJustified" justified="true">
+		<uib-tab index="0" heading="Datos del trámite">
+			<br/>
+			<div ng-if="!verDatosTramiteCtrl.datoTramite.Inmueble" ng-include="'app/modules/datostramites/verdatospersonas.html'"></div>
+			<div ng-if="verDatosTramiteCtrl.datoTramite.Inmueble" ng-include="'app/modules/datostramites/verdatosinmueble.html'"></div>
+		</uib-tab>
+		<uib-tab index="1" heading="Plazos vigentes del trámite">
+			<br/>
+			<div class="form-group form-group-sm">
+				<label class="col-sm-2 control-label">Plazo</label>
+				<div class="col-sm-5">
+					<select class="form-control" ng-model="verDatosTramiteCtrl.plazoId"
+					        ng-options="plazo.Id as plazo.Descripcion for plazo in verDatosTramiteCtrl.plazos"
+					        ng-change="verDatosTramiteCtrl.plazoChanged()">
+						<option value="">{{verDatosTramiteCtrl.plazos.length == 0 ? "No existen plazos configurados para este trámite" : ""}}</option>
+					</select>
+				</div>
+			</div>
+			<div ng-if="verDatosTramiteCtrl.plazo">
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">Plazo en días</label>
+					<div class="col-sm-5">
+						<span>{{verDatosTramiteCtrl.plazo.PlazoDias}}</span>
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">Tasa provincial</label>
+					<div class="col-sm-5">
+						<span>$ {{verDatosTramiteCtrl.plazo.Costo.toFixed(2)}}</span>
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">Vigencia desde</label>
+					<div class="col-sm-5">
+						<span>{{verDatosTramiteCtrl.plazo.VigenciaDesde}}</span>
+					</div>
+				</div>
+			</div>
+		</uib-tab>
+	</uib-tabset>
+</div>
+
+<div class="form-group">
+	<a href="#/datostramites" class="btn btn-link">Volver</a>
+</div>

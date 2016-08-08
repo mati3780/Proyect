@@ -1,0 +1,88 @@
+﻿<div class="margin-top">
+    <!--DATOS DEL PAGO:COLUMNA 1-->
+    <div class="col-sm-6">
+        <!--DATOS DEL PAGO:ENTIDAD-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Entidad}" ng-if="tramiteCtrl.permiteIngresarDatosPago">
+            <label class="col-sm-3 control-label">Entidad</label>
+            <div class="col-sm-9">
+                <input type="text" name="entidad" class="form-control" placeholder="Entidad" ng-model="tramiteCtrl.tramite.Pago.Entidad" required/>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3">
+                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.entidad.$error.required">El campo Entidad es obligatorio.</p>
+                <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Entidad" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Entidad">
+                    {{error}}
+                </span>
+            </div>
+        </div>
+        <div class="form-group form-group-sm" ng-if="!tramiteCtrl.permiteIngresarDatosPago">
+            <label class="col-sm-3 control-label">Entidad</label>
+            <div class="col-sm-9">
+                <span>{{tramiteCtrl.tramite.Pago.Entidad}}</span>
+            </div>
+        </div>
+        <!--DATOS DEL PAGO:FECHA PAGO-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Fecha}" ng-if="tramiteCtrl.permiteIngresarDatosPago">
+            <label class="col-sm-3 control-label">Fecha de Pago</label>
+            <div class="col-sm-3">
+                <input type="datetime" name="fecha" class="form-control" placeholder="Fecha de Pago" datetime-picker ng-model="tramiteCtrl.tramite.Pago.Fecha" required/>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3">
+                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.fecha.$error.required">El campo Fecha de Pago es obligatorio.</p>
+                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.fecha.$error.datetime">El campo Fecha de Pago es inválido. Solo se permiten fechas.</p>
+                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.fecha.$error.GreaterThanOrEqualToFechaSolicitud">El campo Fecha de Pago debe ser mayor o igual que Fecha Solicitud.</p>
+                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.fecha.$error.LessThanOrEqualToToday">El campo Fecha de Pago debe ser menor o igual que Hoy.</p>
+                <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Fecha" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Fecha">
+                    {{error}}
+                </span>
+            </div>
+        </div>
+        <div class="form-group form-group-sm" ng-if="!tramiteCtrl.permiteIngresarDatosPago">
+            <label class="col-sm-3 control-label">Fecha de Pago</label>
+            <div class="col-sm-9">
+                <span>{{tramiteCtrl.tramite.Pago.Fecha}}</span>
+            </div>
+        </div>
+    </div>
+    <!--DATOS DEL PAGO:COLUMNA 2-->
+    <div class="col-sm-6">
+        <!--DATOS DEL PAGO:SUCURSAL-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Sucursal}" ng-if="tramiteCtrl.permiteIngresarDatosPago">
+            <label class="col-sm-3 control-label">Sucursal</label>
+            <div class="col-sm-9">
+                <input type="text" name="sucursal" class="form-control" placeholder="Sucursal" ng-model="tramiteCtrl.tramite.Pago.Sucursal" required/>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3">
+                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.sucursal.$error.required">El campo Sucursal es obligatorio.</p>
+                <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Sucursal" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Sucursal">
+                    {{error}}
+                </span>
+            </div>
+        </div>
+        <div class="form-group form-group-sm" ng-if="!tramiteCtrl.permiteIngresarDatosPago">
+            <label class="col-sm-3 control-label">Sucursal</label>
+            <div class="col-sm-9">
+                <span>{{tramiteCtrl.tramite.Pago.Sucursal}}</span>
+            </div>
+        </div>
+        <!--DATOS DEL PAGO:CODIGO PAGO-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.CodigoIdentificacion}" ng-if="tramiteCtrl.permiteIngresarDatosPago">
+            <label class="col-sm-3 control-label">Código de Pago</label>
+            <div class="col-sm-9">
+                <input type="text" name="codigoIdentificacion" class="form-control" placeholder="Código de Pago" ng-model="tramiteCtrl.tramite.Pago.CodigoIdentificacion" maxlength="100" required/>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3">
+                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.codigoIdentificacion.$error.required">El campo Código de Pago es obligatorio.</p>
+                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.codigoIdentificacion.$error.maxlength">La longitud máxima del campo Código de Pago es de 100 caracteres.</p>
+                <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.CodigoIdentificacion" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.CodigoIdentificacion">
+                    {{error}}
+                </span>
+            </div>
+        </div>
+        <div class="form-group form-group-sm" ng-if="!tramiteCtrl.permiteIngresarDatosPago">
+            <label class="col-sm-3 control-label">Código de Pago</label>
+            <div class="col-sm-9">
+                <span>{{tramiteCtrl.tramite.Pago.CodigoIdentificacion}}</span>
+            </div>
+        </div>
+    </div>
+</div>

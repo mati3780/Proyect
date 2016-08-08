@@ -1,0 +1,100 @@
+﻿<div class="row">
+    <div ng-show="tramiteCtrl.tramiteExiste">
+        <form name="tramiteCtrl.tramiteForm" class="form-horizontal" novalidate ng-submit="tramiteCtrl.guardar()">
+            <!--BOTONES-->
+            <div class="form-group">
+                <div class="col-sm-12 text-right">
+                    <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.verObservacion()" ng-if="tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 4">Ver Observación</button>
+                    <a class="btn btn-primary" ng-href="#/jurisdiccionRequirente/{{tramiteCtrl.tramite.Id}}/EntregarPDF" ng-if="tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 7">Entregar PDF</a>
+                    <a class="btn btn-primary" ng-href="#/jurisdiccionRequirente/{{tramiteCtrl.tramite.Id}}/VerificarPDF" ng-if="tramiteCtrl.tramite.EstadoActual.TramiteSubEstadoIdentificador === 10">Verificar PDF entregado</a>
+                </div>
+            </div>
+
+            <!--VALIDATION SUMMARY-->
+            <div class="row alert alert-danger" ng-if="tramiteCtrl.tramiteFormEsInvalido">
+                <p>El formulario no es válido. Por favor revise los campos a ingresar en el mismo.</p>
+            </div>
+            <div class="row alert alert-danger" ng-if="tramiteCtrl.validationErrors.formErrors.length > 0">
+                <ul>
+                    <li ng-repeat="formError in tramiteCtrl.validationErrors.formErrors">
+                        <span>{{formError}}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!--TABS-->
+            <uib-tabset active="active">
+
+                <!--SOLICITANTE-->
+                <uib-tab index="0" heading="Solicitante">
+                    <div ng-include src="'app/modules/tramites/Solicitante.html'"></div>
+                </uib-tab>
+
+                <!--SOLICITUD-->
+                <uib-tab index="1" heading="Solicitud">
+                    <div ng-include src="'app/modules/tramites/Solicitud.html'"></div>
+                </uib-tab>
+
+                <!--PERSONA-->
+                <uib-tab index="2" heading="Persona" ng-if="tramiteCtrl.tramite.Entidad.Persona">
+                    <div ng-include src="'app/modules/tramites/Persona.html'"></div>
+                </uib-tab>
+
+                <!--INMUEBLE-->
+                <uib-tab index="3" heading="Inmueble" ng-if="tramiteCtrl.tramite.Entidad.Inmueble">
+                    <div ng-include src="'app/modules/tramites/Inmueble.html'"></div>
+                </uib-tab>
+
+                <!--TITULAR PESONA JURIDICA-->
+                <uib-tab index="4" heading="Titular Persona Jurídica" ng-if="tramiteCtrl.showTabTitularPersonaJuridica">
+                    <div ng-include src="'app/modules/tramites/TitularPersonaJuridica.html'"></div>
+                </uib-tab>
+
+                <!--TITULAR PERSONA FISICA-->
+                <uib-tab index="5" heading="Titular Persona Humana" ng-if="tramiteCtrl.showTabTitularPersonaFisica">
+                    <div ng-include src="'app/modules/tramites/TitularPersonaFisica.html'"></div>
+                </uib-tab>
+
+                <!--DATOS ADICIONALES-->
+                <uib-tab index="6" heading="Datos Adicionales">
+                    <div ng-include src="'app/modules/tramites/Observacion.html'"></div>
+                </uib-tab>
+
+                <!--DATOS DEL PAGO-->
+                <uib-tab index="7" heading="Datos del Pago" ng-if="!tramiteCtrl.tramite.ReparticionSolicitanteId">
+                    <div ng-include src="'app/modules/tramites/Pago.html'"></div>
+                </uib-tab>
+
+                <!--HISTORIAL DEL TRAMITE-->
+                <uib-tab index="8" heading="Historial del Trámite">
+                    <div ng-include src="'app/modules/tramites/Historia.html'"></div>
+                </uib-tab>
+
+            </uib-tabset>
+
+            <div class="row margin-bottom">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary" ng-if="tramiteCtrl.permiteRectificar">Responder Trámite</button>
+                    <a href="#/jurisdiccionrequirente" class="btn btn-link" ng-if="tramiteCtrl.permiteRectificar">Cancelar</a>
+                    <a href="#/jurisdiccionrequirente" class="btn btn-link" ng-if="!tramiteCtrl.permiteRectificar">Atrás</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div ng-show="tramiteCtrl.tramiteInexistente">
+        <span class="text-danger">Trámite no encontrado.</span>
+    </div>
+</div>
+<!--MODAL VER OBSERVACION-->
+<script type="text/ng-template" id="ModalVerObservacion.html">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">{{verObservacionCtrl.tituloObservacion}}</h4>
+    </div>
+    <div class="modal-body">
+        <div ng-include src="'app/modules/jurisdiccionrequirente/VerObservacion.html'"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="verObservacionCtrl.cerrarObservar()">Cerrar</button>
+    </div>
+</script>

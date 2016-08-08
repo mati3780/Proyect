@@ -1,0 +1,203 @@
+﻿<div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<b>Filtrado</b>
+		</div>
+		<div class="panel-body">
+			<div class="form-horizontal">
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<div class='input-group date'>
+								<input type="datetime" class="form-control" placeholder="Fecha desde" datetime-picker ng-model="auditoriaCtrl.filtro.fechaOperacionInicial" />
+								<span class="input-group-addon">
+									<span class="fa fa-fw fa-calendar"></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<div class='input-group date'>
+								<input type="text" class="form-control" placeholder="Fecha hasta" datetime-picker ng-model="auditoriaCtrl.filtro.fechaOperacionFinal" />
+								<span class="input-group-addon">
+									<span class="fa fa-fw fa-calendar"></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<input type="text" class="form-control" placeholder="Url" ng-model="auditoriaCtrl.filtro.url"
+								   uib-typeahead="url as url for url in auditoriaCtrl.urls | filter:$viewValue" typeahead-show-hint="true"
+								   typeahead-min-length="0" />
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<input type="text" class="form-control" placeholder="Usuario" ng-model="auditoriaCtrl.filtro.usuario"
+								   uib-typeahead="usuario as usuario for usuario in auditoriaCtrl.usuarios | filter:$viewValue" typeahead-show-hint="true"
+								   typeahead-min-length="0" />
+						</div>
+					</div>
+
+				</div>
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<input type="text" class="form-control" placeholder="Navegador" ng-model="auditoriaCtrl.filtro.navegador"
+								   uib-typeahead="navegador as navegador for navegador in auditoriaCtrl.navegadores | filter:$viewValue" typeahead-show-hint="true"
+								   typeahead-min-length="0" />
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<input type="text" class="form-control" placeholder="IP" ng-model="auditoriaCtrl.filtro.ip" />
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<input type="text" class="form-control" placeholder="Nombre Entidad" ng-model="auditoriaCtrl.filtro.entidadNombre"
+								   uib-typeahead="entidad as entidad for entidad in auditoriaCtrl.entidades | filter:$viewValue" typeahead-show-hint="true"
+								   typeahead-min-length="0" />
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<input type="text" class="form-control" placeholder="ID EntidadId" ng-model="auditoriaCtrl.filtro.entidadKey" />
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<select title="Tipo de acción" class="form-control" ng-model="auditoriaCtrl.filtro.accion">
+								<option value="">Seleccione un tipo de acción</option>
+								<option value="Creacion">Creación</option>
+								<option value="Edicion">Edición</option>
+								<option value="Eliminacion">Eliminación</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<input type="text" class="form-control" placeholder="Json Operación" ng-model="auditoriaCtrl.filtro.jsonOperacion" />
+						</div>
+					</div>
+				</div>
+
+				<div class="pull-right">
+					<button class="btn btn-primary" title="Filtrar" ng-click="auditoriaCtrl.filtrar()">Filtrar</button>
+					<button class="btn btn-default" title="Limpiar" ng-click="auditoriaCtrl.limpiar()">Limpiar</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<table datatable dt-options="auditoriaCtrl.dtOptions" dt-columns="auditoriaCtrl.dtColumns" dt-instance="auditoriaCtrl.dtInstance" class="table-responsive row-border hover" width="100%"></table>
+
+	<script type="text/ng-template" id="auditoriaModal.html">
+		<div class="modal-header bg-primary">
+			<button type="button" class="close" ng-click="auditoriaMD.close()" title="Cerrar">
+				<i class="fa fa-times"></i><span class="sr-only">Cerrar</span>
+			</button>
+			<h4 class="modal-title">Operación Nro: {{auditoriaMD.operacion.Id}}</h4>
+		</div>
+		<div class="modal-body">
+			<div ng-hide="auditoriaMD.operacionInexistente" class="container-fluid detalle">
+				<dl>
+					<dt>
+						<label>Fecha operación</label>
+					</dt>
+					<dd>
+						{{auditoriaMD.operacion.FechaOperacion}}
+					</dd>
+
+					<dt>
+						<label>Url</label>
+					</dt>
+					<dd>
+						{{auditoriaMD.operacion.Url}}
+					</dd>
+
+					<dt>
+						<label>Usuario</label>
+					</dt>
+					<dd>
+						{{auditoriaMD.operacion.Usuario}}
+					</dd>
+
+					<dt>
+						<label>Navegador</label>
+					</dt>
+					<dd>
+						{{auditoriaMD.operacion.Navegador}}
+					</dd>
+
+					<dt>
+						<label>Ip</label>
+					</dt>
+					<dd>
+						{{auditoriaMD.operacion.Ip}}
+					</dd>
+
+					<dt>Entidades modificadas</dt>
+					<dd>
+						<table class="table" width="100%">
+							<thead>
+								<tr>
+									<th>Acción</th>
+									<th>Nombre Entidad</th>
+									<th>IDs Entidad</th>
+									<th>Operación</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-if="auditoriaMD.operacion.Detalles.length == 0">
+									<td colspan="4" class="text-center"><span>No existen detalles de la operación</span></td>
+								</tr>
+								<tr ng-repeat="detalle in auditoriaMD.operacion.Detalles">
+									<td>{{detalle.Accion}}</td>
+									<td>{{detalle.EntidadNombre}}</td>
+									<td>
+										<span ng-repeat-start="(key, value) in detalle.EntidadKey"><b>{{key}}: </b>{{value}}</span><br ng-repeat-end />
+									</td>
+									<td>
+										<span ng-repeat-start="columna in detalle.JsonOperacion"><b>Columna: </b>{{columna.Nombre}}</span><br />
+										<span><b>Valor actual: </b>{{columna.Value}}</span><br />
+										<span><b>Valor ant.: </b>{{columna.OldValue != null ? columna.OldValue : ""}}</span><br />
+										<hr ng-repeat-end />
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</dd>
+				</dl>
+			</div>
+			<div ng-show="auditoriaMD.operacionInexistente">
+				<span class="text-danger">La operación especificada no existe.</span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" ng-click="auditoriaMD.close()">Cerrar</button>
+		</div>
+	</script>
+</div>
+

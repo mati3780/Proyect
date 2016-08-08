@@ -1,0 +1,36 @@
+﻿<form name="ingresarPDFCtrl.ingresarPDFForm" class="form-horizontal" novalidate ng-submit="ingresarPDFCtrl.aceptarObservar()">
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <div class="row alert alert-info">
+                <p>
+                    <i class="fa fa-info-circle"></i> Si ingresa PDF, el Trámite debe ser Verificado.
+                </p>
+            </div>
+            <!--OBSERVACION-->
+            <div class="form-group form-group-sm">
+                <div class="col-sm-1">
+                    <img alt="Logo PDF" src="Content/img/pdf.png">
+                </div>
+                <div class="col-sm-11">
+                    <input id="archivo" name="archivo" style="margin-top: 15px;" type="file" nv-file-select="" uploader="uploader" />
+                    <div class="row alert alert-danger" ng-if="ingresarPDFCtrl.validationErrors.formErrors.length > 0">
+                        <ul>
+                            <li ng-repeat="formError in ingresarPDFCtrl.validationErrors.formErrors">
+                                <span>{{formError}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-11 col-sm-offset-1">
+                    <p class="error" ng-if="ingresarPDFCtrl.archivoErrorRequired">Es obligatorio seleccionar un archivo PDF.</p>
+                    <p class="error" ng-if="ingresarPDFCtrl.archivoFormatoIncorrecto">Seleccione un archivo formato PDF.</p>
+                    <p class="error" ng-if="ingresarPDFCtrl.archivoSizeIncorrecto">Es tamaño del archivo debe ser menor a 5 MB.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="ingresarPDFCtrl.aceptar()">Aceptar</button>
+        <button type="button" class="btn btn-default" ng-click="ingresarPDFCtrl.cancelar()">Cancelar</button>
+    </div>
+</form>

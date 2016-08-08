@@ -1,0 +1,314 @@
+﻿<div class="row">
+    <div ng-show="depositoCtrl.liquidacionExiste">
+
+        <!--BOTONERA-->
+        <div class="margin-bottom text-right" ng-if="depositoCtrl.liquidacion.ExistePdfDeposito || depositoCtrl.liquidacion.ExistePdfConciliacion">
+            <a class="btn btn-primary" ng-href="#/ActualizarDepositosAcreditaciones/{{depositoCtrl.liquidacion.Id}}/verPDFDeposito" title="Ver PDF Depósito"
+               ng-if="depositoCtrl.liquidacion.ExistePdfDeposito">Ver PDF Depósito</a>
+            <a class="btn btn-primary" ng-href="#/ActualizarDepositosAcreditaciones/{{depositoCtrl.liquidacion.Id}}/verPDFAcreditacion" title="Ver PDF Acreditación"
+               ng-if="depositoCtrl.liquidacion.ExistePdfConciliacion">Ver PDF Acreditación</a>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Detalles de la liquidación</div>
+            <div class="panel-body">
+
+                <div class="col-sm-12">
+                    <!--FECHA LIMITE-->
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Límite para Depositar</label>
+                        <div class="col-sm-9">
+                            <span>{{depositoCtrl.liquidacion.FechaCorteHasta}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12" ng-if="depositoCtrl.liquidacion.MovimientoEnumValue === 1">
+                    <!--JURISDISCCION ORIGEN-->
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Jurisdicción Origen</label>
+                        <div class="col-sm-9">
+                            <span>{{depositoCtrl.liquidacion.Origen}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12" ng-if="depositoCtrl.liquidacion.MovimientoEnumValue === 2">
+                    <!--JURISDISCCION DESTINO-->
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Jurisdicción Destino</label>
+                        <div class="col-sm-9">
+                            <span>{{depositoCtrl.liquidacion.Destino}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12" ng-if="depositoCtrl.liquidacion.MovimientoEnumValue === 2 && depositoCtrl.liquidacion.EstadoDeposito">
+                    <!--ESTADO-->
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Estado</label>
+                        <div class="col-sm-9">
+                            <span>{{depositoCtrl.liquidacion.EstadoDeposito}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <!--IMPORTE-->
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label">Importe</label>
+                        <div class="col-sm-9">
+                            <span>{{depositoCtrl.liquidacion.Importe}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <!--DEPOSITO-->
+                    <div class="panel panel-primary margin-top-s">
+                        <div class="panel-heading">Detalles del depósito</div>
+                        <div class="panel-body">
+                            <span ng-if="!depositoCtrl.liquidacion.ExisteDeposito">Depósito no registrado.</span>
+                            <div ng-if="depositoCtrl.liquidacion.ExisteDeposito">
+
+                                <div class="col-sm-12">
+                                    <!--CUENTA BANCARIA-->
+                                    <div class="panel panel-info margin-top-s">
+                                        <div class="panel-heading">Cuenta Bancaria destinataria</div>
+                                        <div class="panel-body">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <!--ENTIDAD-->
+                                                        <div class="form-group form-group-sm">
+                                                            <label class="col-sm-4 control-label">Entidad</label>
+                                                            <div class="col-sm-8">
+                                                                <span>{{depositoCtrl.liquidacion.CuentaBancaria.Entidad}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <!--SUCURSAL-->
+                                                        <div class="form-group form-group-sm">
+                                                            <label class="col-sm-4 control-label">Sucursal</label>
+                                                            <div class="col-sm-8">
+                                                                <span>{{depositoCtrl.liquidacion.CuentaBancaria.Sucursal}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <!--TIPO CUENTA-->
+                                                        <div class="form-group form-group-sm">
+                                                            <label class="col-sm-4 control-label">Tipo Cuenta</label>
+                                                            <div class="col-sm-8">
+                                                                <span>{{depositoCtrl.liquidacion.CuentaBancaria.Tipo}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <!--NUMERO CUENTA-->
+                                                        <div class="form-group form-group-sm">
+                                                            <label class="col-sm-4 control-label">Número Cuenta</label>
+                                                            <div class="col-sm-8">
+                                                                <span>{{depositoCtrl.liquidacion.CuentaBancaria.Numero}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--CBU-->
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group form-group-sm">
+                                                            <label class="col-sm-4 control-label">CBU</label>
+                                                            <div class="col-sm-8">
+                                                                <span>{{depositoCtrl.liquidacion.CuentaBancaria.CBU}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!--ENTIDAD-->
+                                            <div class="form-group form-group-sm">
+                                                <label class="col-sm-4 control-label">Entidad de Pago</label>
+                                                <div class="col-sm-8">
+                                                    <span>{{depositoCtrl.liquidacion.Entidad}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <!--SUCURSAL-->
+                                            <div class="form-group form-group-sm">
+                                                <label class="col-sm-4 control-label">Sucursal de Pago</label>
+                                                <div class="col-sm-8">
+                                                    <span>{{depositoCtrl.liquidacion.Sucursal}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <!--CAJERO-->
+                                            <div class="form-group form-group-sm">
+                                                <label class="col-sm-4 control-label">Cajero</label>
+                                                <div class="col-sm-8">
+                                                    <span>{{depositoCtrl.liquidacion.Cajero}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!--FECHA DEPOSITO-->
+                                            <div class="form-group form-group-sm">
+                                                <label class="col-sm-4 control-label">Fecha Depósito</label>
+                                                <div class="col-sm-8">
+                                                    <span>{{depositoCtrl.liquidacion.FechaDeposito}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <!--TRANSACCION NUMERO-->
+                                            <div class="form-group form-group-sm">
+                                                <label class="col-sm-4 control-label">Transacción Nro.</label>
+                                                <div class="col-sm-8">
+                                                    <span>{{depositoCtrl.liquidacion.Transaccion}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <!--CONCILIACION BANCARIA-->
+                    <div class="panel panel-primary" ng-if="depositoCtrl.liquidacion.ExisteDeposito">
+                        <div class="panel-heading">Detalles de la Conciliación Bancaria</div>
+                        <div class="panel-body">
+                            <span ng-if="!depositoCtrl.liquidacion.ExisteConciliacion">Conciliación Bancaria no registrada.</span>
+                            <div ng-if="depositoCtrl.liquidacion.ExisteConciliacion">
+                                <div class="col-sm-12">
+                                    <!--VERIFICADO-->
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-3 control-label">Se verificó la Transacción</label>
+                                        <div class="col-sm-9">
+                                            <span ng-if="depositoCtrl.liquidacion.ConciliacionVerificacion">SI</span>
+                                            <span ng-if="depositoCtrl.liquidacion.ConciliacionVerificacion">NO</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <!--OBSERVACION-->
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-3 control-label">Observación</label>
+                                        <div class="col-sm-9">
+                                            <p style="white-space: pre-wrap;">{{depositoCtrl.liquidacion.ConciliacionObservacion}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <!--MOVIMIENTOS-->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Movimientos Relacionados</div>
+                        <div class="panel-body">
+                            <table class="table table-striped table-condensed margin-bottom-no width-100">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha Trámite</th>
+                                        <th>Trámite Nro.</th>
+                                        <th>Movimiento</th>
+                                        <th class="text-right">Formulario PROYECT</th>
+                                        <th class="text-right">Tasa Provincial</th>
+                                        <th class="text-right">Importe PROYECT</th>
+                                        <th class="text-right">Débito</th>
+                                        <th class="text-right">Crédito</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-if="depositoCtrl.liquidacion.Movimientos.length == 0">
+                                        <td colspan="8" class="text-center"><span>No se encontraron movimientos relacionados.</span></td>
+                                    </tr>
+                                    <tr ng-repeat="movimiento in depositoCtrl.liquidacion.Movimientos">
+                                        <td>{{movimiento.FechaTramite}}</td>
+                                        <td>{{movimiento.NumeroTramite}}</td>
+                                        <td>{{movimiento.Movimiento}}</td>
+                                        <td class="text-right">$ {{movimiento.TasaNacional.toFixed(2)}}</td>
+                                        <td class="text-right">$ {{movimiento.TasaProvincial.toFixed(2)}}</td>
+                                        <td class="text-right">$ {{movimiento.ImporteProyect.toFixed(2)}}</td>
+                                        <td class="text-right"><span ng-if="movimiento.Debito > 0">$ {{movimiento.Debito.toFixed(2)}}</span></td>
+                                        <td class="text-right"><span ng-if="movimiento.Credito > 0">$ {{movimiento.Credito.toFixed(2)}}</span></td>
+                                    </tr>
+                                    <tr ng-if="depositoCtrl.liquidacion.Movimientos.length > 0">
+                                        <td colspan="3" class="text-right">
+                                            <strong>Totales:</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>$ {{depositoCtrl.totalTasaNacional().toFixed(2)}}</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>$ {{depositoCtrl.totalTasaProvincial().toFixed(2)}}</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>$ {{depositoCtrl.totalImporteProyect().toFixed(2)}}</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>$ {{depositoCtrl.totalDebito().toFixed(2)}}</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>$ {{depositoCtrl.totalCredito().toFixed(2)}}</strong>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="depositoCtrl.liquidacion.Movimientos.length > 0" class="info">
+                                        <td colspan="6" class="text-right">
+                                            <strong ng-if="depositoCtrl.liquidacion.MovimientoEnumValue === 2">Total a depositar:</strong>
+                                            <strong ng-if="depositoCtrl.liquidacion.MovimientoEnumValue === 1">Total a acreditar:</strong>
+                                        </td>
+                                        <td colspan="2" class="text-center">
+                                            <strong ng-if="depositoCtrl.liquidacion.MovimientoEnumValue === 2">{{depositoCtrl.liquidacion.Importe}}</strong>
+                                            <strong ng-if="depositoCtrl.liquidacion.MovimientoEnumValue === 1">{{depositoCtrl.liquidacion.Importe}}</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div ng-if="depositoCtrl.liquidacionInexistente">
+        <span class="text-danger">Deposito no encontrado.</span>
+    </div>
+    <div class="margin-bottom">
+        <a href="#/ActualizarDepositosAcreditaciones" class="btn btn-link">Atrás</a>
+    </div>
+</div>

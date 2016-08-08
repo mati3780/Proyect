@@ -1,0 +1,57 @@
+﻿<div>
+    <div class="row">
+        <!--PANEL JURISDICCION-->
+        <div class="panel panel-default">
+            <div class="panel-heading">Jurisdicción</div>
+            <div class="panel-body">
+                <!--JURISDICCION-->
+                <select class="form-control" name="jurisdiccion" ng-model="depPendientesCtrl.filtro.JurisdiccionId"
+                        ng-options="jurisdiccion.Id as jurisdiccion.Descripcion for jurisdiccion in depPendientesCtrl.jurisdicciones"
+                        ng-change="depPendientesCtrl.jurisdiccionChanged()">
+                    <option value="">Seleccione la jurisdicción</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12" ng-show="depPendientesCtrl.filtro.JurisdiccionId">
+            <div class="form-group form-group-sm text-right">
+                <a class="btn btn-primary" ng-disabled="depPendientesCtrl.habilitarCompensacion()"
+                   ng-href="#/DepositosAcreditacionesPendientes/{{depPendientesCtrl.filtro.JurisdiccionId}}/{{depPendientesCtrl.ids()}}/{{depPendientesCtrl.calcularTotal().toFixed(2)}}" access="CompensarDepositoAcreditacionPendiente">
+                    Compensar
+                </a>
+            </div>
+        </div>
+        <div ng-show="depPendientesCtrl.filtro.JurisdiccionId">
+            <!--<table datatable="" dt-options="depPendientesCtrl.dtOptions" dt-columns="depPendientesCtrl.dtColumns" dt-instance="depPendientesCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>-->
+            <table class="table margin-bottom-no width-100">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Límite Depósito</th>
+                        <th>Movimiento</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Importe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dato in depPendientesCtrl.datos" ng-click="depPendientesCtrl.rowClicked(dato)" ng-class="{semaforoRojo : (dato.Movimiento ==='Depósito'), semaforoVerde : (dato.Movimiento ==='Acreditación')}">
+                        <td><input type="checkbox" ng-click="depPendientesCtrl.rowClicked(dato)" ng-model="dato.selected" /></td>
+                        <td>{{dato.FechaCorteHasta}}</td>
+                        <td>{{dato.Movimiento}}</td>
+                        <td>{{dato.Origen}}</td>
+                        <td>{{dato.Destino}}</td>
+                        <td class="text-right">$ {{dato.Importe.toFixed(2)}}</td>
+                    </tr>
+                    <tr ng-if="depPendientesCtrl.datos.length > 0" class="info">
+                        <td colspan="5" class="text-right">
+                            <strong>Saldo:</strong>
+                        </td>
+                        <td class="text-right">
+                            <strong>$ {{depPendientesCtrl.calcularTotal().toFixed(2)}}</strong>
+                        </td>
+                        <!--<td colspan="4"></td>-->
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>

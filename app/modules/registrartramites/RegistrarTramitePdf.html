@@ -1,0 +1,11 @@
+﻿<p>
+    A continuación podrá <span ng-if="registrarTramitePdfCtrl.datauri">visualizar</span><span ng-if="!registrarTramitePdfCtrl.datauri">descargar</span> la solicitud que acaba de generar para imprimirla.
+</p>
+<a class="btn btn-success" ng-if="!registrarTramitePdfCtrl.datauri" ng-click="registrarTramitePdfCtrl.descargarSolicitud()">Descargar solicitud</a>
+
+<div ng-show="registrarTramitePdfCtrl.pdfContent">
+    <object data="{{registrarTramitePdfCtrl.pdfContent}}" type="application/pdf" class="col-sm-12" style="height: 400px;"></object>
+</div>
+<div class="margin-bottom">
+    <a href="#/registrartramites" class="btn btn-link">Atrás</a>
+</div>

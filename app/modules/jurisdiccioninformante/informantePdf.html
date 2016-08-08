@@ -1,0 +1,11 @@
+﻿<p>
+    A continuación podrá <span ng-if="informantePdfCtrl.datauri">visualizar</span><span ng-if="!informantePdfCtrl.datauri">descargar</span> la solicitud que acaba de generar para imprimirla.
+</p>
+<a class="btn btn-success" ng-if="!informantePdfCtrl.datauri" ng-click="informantePdfCtrl.descargarSolicitud()">Descargar solicitud</a>
+
+<div ng-show="informantePdfCtrl.pdfContent">
+    <object data="{{informantePdfCtrl.pdfContent}}" type="application/pdf" class="col-sm-12" style="height: 400px;"></object>
+</div>
+<div class="margin-bottom">
+    <a href="#/jurisdiccionInformante" class="btn btn-link">Atrás</a>
+</div>

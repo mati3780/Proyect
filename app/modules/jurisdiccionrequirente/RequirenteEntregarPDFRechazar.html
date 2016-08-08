@@ -1,0 +1,41 @@
+﻿<form name="requirenteEntregarPDFRechazarCtrl.requirenteEntregarPDFRechazarForm" class="form-horizontal" novalidate ng-submit="requirenteEntregarPDFRechazarCtrl.rechazar()">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">Rechazar Trámite</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <!--MOTIVO-->
+            <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': requirenteEntregarPDFRechazarCtrl.validationErrors.elementErrors.MotivoId}">
+                <label class="col-sm-2 control-label">Motivo</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="motivo" ng-model="requirenteEntregarPDFRechazarCtrl.MotivoId" required>
+                        <option value="">Seleccione Motivo</option>
+                        <option value="8">El PDF no corresponde con el informe solicitado</option>
+                        <option value="9">El PDF no se visualiza correctamente o no puede abrirse</option>
+                    </select>
+                </div>
+                <div class="col-sm-10 col-sm-offset-2">
+                    <p class="help-block" ng-if="requirenteEntregarPDFRechazarCtrl.requirenteEntregarPDFRechazarForm.motivo.$error.required">El campo Motivo obligatorio.</p>
+                    <span class="help-block" ng-if="requirenteEntregarPDFRechazarCtrl.requirenteEntregarPDFRechazarForm.elementErrors.MotivoId" ng-repeat="error in controller.validationErrors.elementErrors.MotivoId">
+                        {{error}}
+                    </span>
+                </div>
+            </div>
+            <!--OBSERVACION-->
+            <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+                <label class="col-sm-2 control-label">Observación</label>
+                <div class="col-sm-10">
+                    <textarea name="observacion" rows="4" class="form-control" ng-model="requirenteEntregarPDFRechazarCtrl.Observacion" required maxlength="1000"></textarea>
+                </div>
+                <div class="col-sm-10 col-sm-offset-2">
+                    <p class="help-block" ng-if="requirenteEntregarPDFRechazarCtrl.requirenteEntregarPDFRechazarForm.observacion.$error.required">El campo Observación es obligatorio.</p>
+                    <p class="help-block" ng-if="requirenteEntregarPDFRechazarCtrl.requirenteEntregarPDFRechazarForm.observacion.$error.maxlength">La longitud máxima del campo Observación es de 1000 caracteres.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Rechazar</button>
+        <button type="button" class="btn btn-default" ng-click="requirenteEntregarPDFRechazarCtrl.cancelar()">Cancelar</button>
+    </div>
+</form>

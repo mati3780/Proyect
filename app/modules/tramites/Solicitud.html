@@ -1,0 +1,53 @@
+﻿<div class="margin-top row">
+
+    <div class="col-sm-12">
+        <!--SOLICITUD:JURISDICCION REQUIRENTE-->
+        <div class="form-group form-group-sm">
+            <label class="col-sm-2 control-label">Jurisdicción Requirente</label>
+            <div class="col-sm-10">
+                <span>{{tramiteCtrl.tramite.JurisdiccionRequirente.Descripcion}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <!--SOLICITUD:SERVICIO-->
+        <div class="form-group form-group-sm">
+            <label class="col-sm-2 control-label">Servicio</label>
+            <div class="col-sm-10">
+                <span>{{tramiteCtrl.tramite.Servicio.Descripcion}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <!--SOLICITUD:SOLICITUDES-->
+        <table class="table width-100">
+            <thead>
+                <tr>
+                    <th>Jurisdicción Informante</th>
+                    <th>Plazo</th>
+                    <th>Tasa Provincial</th>
+                    <th>PROYECT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="tramiteCtrl.tramite.Tramites.length == 0">
+                    <td colspan="4" class="text-center"><span>No se encontro la Solicitud</span></td>
+                </tr>
+                <tr ng-repeat="solicitud in tramiteCtrl.tramite.Tramites">
+                    <td>{{solicitud.JurisdiccionDescripcion}}</td>
+                    <td>{{solicitud.PlazoDescripcion}}</td>
+                    <td>$ {{solicitud.TasaProvincial.toFixed(2)}}</td>
+                    <td>$ {{solicitud.TasaNacional.toFixed(2)}}</td>
+                </tr>
+                <tr ng-if="tramiteCtrl.tramite.Tramites.length > 0" class="info">
+                    <td colspan="2" class="text-center"><strong>Valor del Trámite : $ {{(tramiteCtrl.totalTasaInformantes() + tramiteCtrl.totalTasaProyectInformantes()).toFixed(2)}}</strong></td>
+                    <td><strong>$ {{tramiteCtrl.totalTasaInformantes().toFixed(2)}}</strong></td>
+                    <td><strong>$ {{tramiteCtrl.totalTasaProyectInformantes().toFixed(2)}}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

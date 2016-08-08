@@ -1,0 +1,185 @@
+﻿<div>
+    <div ng-hide="controller.depositoPendienteInexistente">
+        <form name="controller.depositoPendienteForm" class="form-horizontal" novalidate ng-submit="controller.guardar()">
+            <!--VALIDATION SUMMARY-->
+            <div class="row alert alert-danger" ng-if="controller.validationErrors.formErrors.length > 0">
+                <ul>
+                    <li ng-repeat="formError in controller.validationErrors.formErrors">
+                        <span>{{formError}}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!--BOTONERA-->
+            <div class="margin-bottom text-right">
+                <button type="button" class="btn btn-primary">Registrar</button>
+            </div>
+
+            <!--CUENTA BANCARIA-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Cuenta Bancaria</div>
+                <div class="panel-body">
+                    <table class="table margin-bottom-no width-100">
+                        <thead>
+                            <tr>
+                                <th>Número de Cuenta</th>
+                                <th>Tipo de Cuenta</th>
+                                <th>Entidad</th>
+                                <th>Sucursal</th>
+                                <th>CBU</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="controller.model.CuentasBancarias.length == 0">
+                                <td colspan="5" class="text-center"><span>No se encontro la Cuenta Bancaria</span></td>
+                            </tr>
+                            <tr ng-repeat="cuentaBancaria in controller.model.CuentasBancarias">
+                                <td>{{cuentaBancaria.numeroCuenta}}</td>
+                                <td>{{cuentaBancaria.tipocuenta}}</td>
+                                <td>{{cuentaBancaria.entidad}}</td>
+                                <td>{{cuentaBancaria.sucursal}}</td>
+                                <td>{{cuentaBancaria.cbu}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--DEPOSITO-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Depósito</div>
+                <div class="panel-body">
+
+                    <div class="col-md-12">
+                        <!--JURISDISCCION-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Jurisdicción</label>
+                            <div class="col-sm-9">
+                                <span>{{controller.deposito.Jurisdiccion}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--IMPORTE-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Importe Compensación</label>
+                            <div class="col-sm-9">
+                                <span>{{controller.deposito.Importe}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--FECHA DEPOSITO-->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.FechaDeposito}">
+                            <label class="col-sm-3 control-label">Fecha Depósito</label>
+                            <div class="col-sm-9">
+                                <input type="datetime" name="fechaDeposito" class="form-control" placeholder="Fecha Depósito" datetime-picker ng-model="controller.deposito.FechaDeposito" />
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <!--<p class="help-block" ng-if="controller.plazoForm.fechaDeposito.$error.required">El campo Fecha Depósito es obligatorio.</p>-->
+                                <p class="help-block" ng-if="controller.plazoForm.fechaDeposito.$error.datetime">El campo Fecha Depósito es inválido. Solo se permiten fechas.</p>
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.FechaDeposito" ng-repeat="error in controller.validationErrors.elementErrors.FechaDeposito">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--TRANSACCION NUMERO-->
+                        <div class="form-group form-group-sm" ng-class="{'has-error': controller.validationErrors.elementErrors.NumeroTransaccion}">
+                            <label class="col-sm-3 control-label">Transacción Nro.</label>
+                            <div class="col-sm-9">
+                                <input type="number" name="numeroTransaccion" class="form-control" placeholder="Transacción Nro." ng-model="controller.deposito.NumeroTransaccion" />
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <p class="help-block" ng-if="controller.plazoForm.numeroTransaccion.$error.numeroTransaccion">El campo Transacción Nro. es inválido. Solo se permiten caracteres numéricos.</p>
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.NumeroTransaccion" ng-repeat="error in controller.validationErrors.elementErrors.NumeroTransaccion">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--ENTIDAD-->
+                        <div class="form-group form-group-sm" ng-class="{'has-error': controller.validationErrors.elementErrors.Entidad}">
+                            <label class="col-sm-3 control-label">Entidad</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="entidad" class="form-control" placeholder="Entidad" ng-model="controller.deposito.Entidad" maxlength="100" />
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <p class="help-block" ng-if="controller.plazoForm.entidad.$error.maxlength">La longitud máxima del campo Entidad es de 100 caracteres.</p>
+                                <!--<p class="help-block" ng-if="controller.plazoForm.entidad.$error.required">El campo Denominación es obligatorio.</p>-->
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.Entidad" ng-repeat="error in controller.validationErrors.elementErrors.Entidad">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--SUCURSAL-->
+                        <div class="form-group form-group-sm" ng-class="{'has-error': controller.validationErrors.elementErrors.Sucursal}">
+                            <label class="col-sm-3 control-label">Sucursal</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="sucursal" class="form-control" placeholder="Sucursal" ng-model="controller.deposito.Sucursal" maxlength="100" />
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <p class="help-block" ng-if="controller.plazoForm.sucursal.$error.maxlength">La longitud máxima del campo Sucursal es de 100 caracteres.</p>
+                                <!--<p class="help-block" ng-if="controller.plazoForm.sucursal.$error.required">El campo Denominación es obligatorio.</p>-->
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.Sucursal" ng-repeat="error in controller.validationErrors.elementErrors.Sucursal">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--CAJERO-->
+                        <div class="form-group form-group-sm" ng-class="{'has-error': controller.validationErrors.elementErrors.Cajero}">
+                            <label class="col-sm-3 control-label">Cajero</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="cajero" class="form-control" placeholder="Cajero" ng-model="controller.deposito.Cajero" maxlength="40"/>
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <p class="help-block" ng-if="controller.plazoForm.cajero.$error.maxlength">La longitud máxima del campo Cajero es de 40 caracteres.</p>
+                                <!--<p class="help-block" ng-if="controller.plazoForm.cajero.$error.required">El campo Denominación es obligatorio.</p>-->
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.Cajero" ng-repeat="error in controller.validationErrors.elementErrors.Cajero">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--RECIBO-->
+                        <div class="form-group form-group-sm" ng-class="{'has-error': controller.validationErrors.elementErrors.Recibo}">
+                            <label class="col-sm-3 control-label">Recibo PDF</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="recibo" />
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.Recibo" ng-repeat="error in controller.validationErrors.elementErrors.Recibo">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="#/depositosAcreditacionesPendientes" class="btn btn-link">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+    <div ng-show="controller.depositoPendienteInexistente">
+        <span class="text-danger">DepositoPendiente no encontrado.</span>
+    </div>
+</div>

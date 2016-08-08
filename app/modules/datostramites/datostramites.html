@@ -1,0 +1,27 @@
+﻿<div>
+	<div class="row pull-right">
+		<a href="#/datostramites/new" access="NuevoDatoTramite" class="btn btn-primary">Nuevo dato</a>
+	</div>
+	<div class="row" style="margin: 5px 0;"></div>
+	<div class="row">
+		<table datatable="" dt-options="datosTramitesCtrl.dtOptions" dt-columns="datosTramitesCtrl.dtColumns" dt-instance="datosTramitesCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>
+
+		<!--<table class="row-border hover">
+			<thead>
+				<tr>
+					<th>Tipo de trámite</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if="datosTramitesCtrl.tramites.length == 0">
+					<td colspan="2">No existen trámites en su jurisdicción</td>
+				</tr>
+				<tr ng-repeat="tramite in datosTramitesCtrl.tramites">
+					<td>{{tramite.Descripcion}}</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>-->
+	</div>
+</div>

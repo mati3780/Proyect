@@ -1,0 +1,160 @@
+﻿<div>
+    <div ng-hide="controller.plazoInexistente">
+        <form name="controller.plazoForm" class="form-horizontal" novalidate ng-submit="controller.guardar()">
+            <!--VALIDATION SUMMARY-->
+            <div class="row alert alert-danger" ng-if="controller.validationErrors.formErrors.length > 0">
+                <ul>
+                    <li ng-repeat="formError in controller.validationErrors.formErrors">
+                        <span>{{formError}}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!--DATOS TRAMITE JURISDICCION-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Datos del Trámite en la Jurisdicción</div>
+                <div class="panel-body">
+
+                    <div class="col-md-12">
+                        <!--JURISDICCION-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Jurisdicción</label>
+                            <div class="col-sm-10">
+                                <span>{{controller.jurisdiccion.Descripcion}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <!--TRAMITES-->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.ServicioId}">
+                            <label class="col-sm-2 control-label">Trámite</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="servicio" ng-model="controller.plazo.ServicioId"
+                                        ng-options="servicio.Id as servicio.Descripcion for servicio in controller.tiposTramites"
+                                        ng-disabled="controller.plazo.Id !== 0" ng-change="controller.servicioChanged()" required>
+                                    <option value="">Seleccione Trámite</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <p class="help-block" ng-if="controller.plazoForm.servicio.$error.required">El campo Trámite es obligatorio.</p>
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.ServicioId" ng-repeat="error in controller.validationErrors.elementErrors.ServicioId">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--DATOS PLAZO TRAMITE-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Datos del Plazo para el Trámite</div>
+                <div class="panel-body">
+
+                    <div class="col-md-6">
+                        <!-- PLAZO -->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.PlazoId}">
+                            <label class="col-sm-4 control-label">Tipo de Plazo</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="plazo" ng-model="controller.plazo.PlazoId"
+                                        ng-options="plazo.Id as plazo.Descripcion for plazo in controller.plazos" ng-disabled="controller.plazo.Id !== 0" required>
+                                    <option value="">Seleccione Tipo de Plazo</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <p class="help-block" ng-if="controller.plazoForm.plazo.$error.required">El campo Tipo de Plazo es obligatorio.</p>
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.PlazoId" ng-repeat="error in controller.validationErrors.elementErrors.PlazoId">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- DIAS -->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.PlazoDias}">
+                            <label class="col-sm-4 control-label">Plazo en Días</label>
+                            <div class="col-sm-8">
+                                <input type="number" name="plazoDias" class="form-control" placeholder="Plazo en Días" ng-model="controller.plazo.PlazoDias" ng-disabled="controller.plazo.Id !== 0" min="0" max="32767" required />
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <p class="help-block" ng-if="controller.plazoForm.plazoDias.$error.required">El campo Plazo en Días es obligatorio.</p>
+                                <p class="help-block" ng-if="controller.plazoForm.plazoDias.$error.number">El campo Plazo en Días es inválido. Solo se permiten caracteres numéricos.</p>
+                                <p class="help-block" ng-if="controller.plazoForm.plazoDias.$error.min">El campo Plazo en Días solo permite valores mayores que 0.</p>
+                                <p class="help-block" ng-if="controller.plazoForm.plazoDias.$error.max">El campo Plazo en Días solo permite valores menores que 32768.</p>
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.PlazoDias" ng-repeat="error in controller.validationErrors.elementErrors.PlazoDias">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- TASA -->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.Costo}">
+                            <label class="col-sm-4 control-label">Tasa Provincial</label>
+                            <div class="col-sm-8">
+                                <input type="number" name="costo" class="form-control" placeholder="Tasa Provincial" ng-model="controller.plazo.Costo" ng-disabled="controller.plazo.Id !== 0" min="0" max="32767" required />
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <p class="help-block" ng-if="controller.plazoForm.costo.$error.required">El campo Tasa Provincial es obligatorio.</p>
+                                <p class="help-block" ng-if="controller.plazoForm.costo.$error.number">El campo Tasa Provincial es inválido. Solo se permiten caracteres numéricos.</p>
+                                <p class="help-block" ng-if="controller.plazoForm.costo.$error.min">El campo Tasa Provincial solo permite valores mayores que 0.</p>
+                                <p class="help-block" ng-if="controller.plazoForm.costo.$error.max">El campo Tasa Provincial solo permite valores menores que 32768.</p>
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.Costo" ng-repeat="error in controller.validationErrors.elementErrors.Costo">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- VIGENCIA DESDE -->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.VigenciaDesde}">
+                            <label class="col-sm-4 control-label">Vigencia Desde</label>
+                            <div class="col-sm-8">
+                                <input type="datetime" name="vigenciaDesde" class="form-control" placeholder="Vigencia Desde" datetime-picker ng-model="controller.plazo.VigenciaDesde" ng-disabled="controller.plazo.Id !== 0" required />
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <p class="help-block" ng-if="controller.plazoForm.vigenciaDesde.$error.required">El campo Vigencia Desde es obligatorio.</p>
+                                <p class="help-block" ng-if="controller.plazoForm.vigenciaDesde.$error.datetime">El campo Vigencia Desde es inválido. Solo se permiten fechas.</p>
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.VigenciaDesde" ng-repeat="error in controller.validationErrors.elementErrors.VigenciaDesde">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" ng-if="controller.plazo.Id !== 0">
+                        <!-- VIGENCIA HASTA -->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': controller.validationErrors.elementErrors.VigenciaHasta}">
+                            <label class="col-sm-4 control-label">Vigencia Hasta</label>
+                            <div class="col-sm-8">
+                                <input type="datetime" name="vigenciaHasta" class="form-control" placeholder="Vigencia Hasta" datetime-picker ng-model="controller.plazo.VigenciaHasta" required />
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <p class="help-block" ng-if="controller.plazoForm.vigenciaHasta.$error.required">El campo Vigencia Hasta es obligatorio.</p>
+                                <p class="help-block" ng-if="controller.plazoForm.vigenciaHasta.$error.datetime">El campo Vigencia Hasta es inválido. Solo se permiten fechas.</p>
+                                <span class="help-block" ng-if="controller.validationErrors.elementErrors.VigenciaHasta" ng-repeat="error in controller.validationErrors.elementErrors.VigenciaHasta">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" busy="<i class='fa fa-spinner fa-spin'></i> Guardando..." busy-disabled="true">Guardar</button>
+                <a href="#/plazos" class="btn btn-link">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+    <div ng-show="controller.plazoInexistente">
+        <span class="text-danger">Plazo no encontrado.</span>
+    </div>
+</div>

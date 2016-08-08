@@ -1,0 +1,47 @@
+﻿<div class="row margin-top">
+    <div class="col-sm-12 text-right" ng-if="tramiteCtrl.permiteRectificar">
+        <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.abrirPersonaFisica('POST')"><i class="fa fa-plus"></i> Agregar Titular Persona Humana</button>
+    </div>
+    <div class="col-sm-12">
+        <table class="table width-100">
+            <thead>
+            <tr>
+                <th>Apellido y Nombre</th>
+                <th>Tipo Doc.</th>
+                <th>Nro. Doc.</th>
+                <th>Cuit / Cuil</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-if="tramiteCtrl.tramite.Entidad.Inmueble.PersonasFisicas.length == 0">
+                <td colspan="5" class="text-center"><span>El trámite no posee Titular Persona Humana</span></td>
+            </tr>
+            <tr ng-repeat="personaFisica in tramiteCtrl.tramite.Entidad.Inmueble.PersonasFisicas | filter:{ Borrado: false }">
+                <td>{{personaFisica.Apellido}}&nbsp;{{personaFisica.Nombre}}</td>
+                <td>{{personaFisica.TipoDocumento.Descripcion}}</td>
+                <td>{{personaFisica.NumeroDocumento}}</td>
+                <td>{{personaFisica.Cuit}}</td>
+                <td class="column-min-width-s text-right">
+                    <button type="button" ng-click="tramiteCtrl.abrirPersonaFisica('PUT', $index)" ng-if="tramiteCtrl.permiteRectificar" class="btn btn-warning btn-sm margin-right-xs" title="Rectificar"><i class="fa fa-pencil"></i></button>
+                    <button type="button" ng-click="tramiteCtrl.abrirPersonaFisica('DELETE', $index)" ng-if="tramiteCtrl.permiteRectificar" class="btn btn-danger btn-sm" title="Borrar"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--MODAL PERSONA FISICA-->
+<script type="text/ng-template" id="ModalPersonaFisica.html">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">Persona Humana</h4>
+    </div>
+    <div class="modal-body">
+        <div ng-include src="'app/modules/tramites/PersonaFisica.html'"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="personaFisicaCtrl.aceptarPersonaFisica()">Aceptar</button>
+        <button type="button" class="btn btn-default" ng-click="personaFisicaCtrl.cancelarPersonaFisica()">Cancelar</button>
+    </div>
+</script>

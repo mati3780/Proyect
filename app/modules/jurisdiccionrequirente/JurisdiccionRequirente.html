@@ -1,0 +1,102 @@
+﻿<div>
+
+    <!--BUSCAR-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Buscar Trámites</div>
+            <div class="panel-body">
+                <form class="form-horizontal" name="jurisdiccionRequirenteCtrl.consultaForm" novalidate ng-submit="jurisdiccionRequirenteCtrl.buscar()">
+                    <div ng-show="jurisdiccionRequirenteCtrl.ErrorBusqueda">
+                        <div class="alert alert-warning">
+                            <span>Hay errores en los campos de Búsqueda</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <!--CODIGO BARRA-->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+                            <label class="col-sm-5 control-label">Código de Barra</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="codigoBarra" placeholder="Código de Barra" ng-model="jurisdiccionRequirenteCtrl.filtro.NumeroTramite" pattern="^[a-fA-F0-9]{12}$">
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-5">
+                                <p class="help-block" ng-if="jurisdiccionRequirenteCtrl.consultaForm.codigoBarra.$error.pattern">Formato inválido para el Número de Trámite</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--TIPO DOCUMENTO-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label">Tipo Doc.</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="tipoDocumento" ng-model="jurisdiccionRequirenteCtrl.filtro.TipoDocumento"
+                                        ng-options="tipoDocumento.Id as tipoDocumento.Descripcion for tipoDocumento in jurisdiccionRequirenteCtrl.tipoDocumentos">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--NUMERO DOCUMENTO-->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+                            <label class="col-sm-5 control-label">Número Doc.</label>
+                            <div class="col-sm-7">
+                                <input type="number" class="form-control" name="numeroDocumento" placeholder="Número de Documento" ng-model="jurisdiccionRequirenteCtrl.filtro.NumeroDocumento" pattern="^[0-9]*$">
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-5">
+                                <p class="help-block" ng-if="jurisdiccionRequirenteCtrl.consultaForm.numeroDocumento.$error.number">Sólo se aceptan caracteres numéricos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group form-group-sm text-right">
+                            <button type="submit" class="btn btn-primary" busy="<i class='fa fa-spinner fa-spin'></i> Buscar..." busy-disabled="true"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-5 control-label">Estado Solicitud</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" name="estadoSolicitud" ng-model="jurisdiccionRequirenteCtrl.filtro.EstadoSolicitud"
+                                        ng-options="estado.Id as estado.Descripcion for estado  in jurisdiccionRequirenteCtrl.estadosSolicitud">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <!--ESTADO TRAMITE-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-5 control-label">Estado Trámite</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" name="estadoTramite" ng-model="jurisdiccionRequirenteCtrl.filtro.EstadoTramite"
+                                        ng-options="estado.Id as estado.Descripcion for estado  in jurisdiccionRequirenteCtrl.estadosTramite" ng-change="jurisdiccionRequirenteCtrl.fillSelectSubEstados()">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <!--SUBESTADO TRAMITE-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-5 control-label">SubEstado Trámite</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" name="subEstadoTramite" ng-model="jurisdiccionRequirenteCtrl.filtro.SubEstadoTramite"
+                                        ng-options="subEstado.Id as subEstado.Descripcion for subEstado  in jurisdiccionRequirenteCtrl.subEstadosTramite" ,
+                                        ng-disabled="!jurisdiccionRequirenteCtrl.filtro.EstadoTramite">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--GRILLA-->
+    <div class="row">
+        <table datatable="" dt-options="jurisdiccionRequirenteCtrl.dtOptions" dt-columns="jurisdiccionRequirenteCtrl.dtColumns" dt-instance="jurisdiccionRequirenteCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>
+    </div>
+
+</div>

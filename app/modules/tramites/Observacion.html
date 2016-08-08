@@ -1,0 +1,30 @@
+﻿<div class="margin-top">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Datos adicionales del Trámite</div>
+        <div class="panel-body">
+
+            <div class="col-sm-12">
+                <div class="form-group form-group-sm" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.DatosAdicionales}" ng-if="tramiteCtrl.permiteRectificar">
+                    <div class="col-sm-12">
+                        <textarea name="datosAdicionales" rows="4" class="form-control" ng-model="tramiteCtrl.tramite.DatosAdicionales" maxlength="1000"></textarea>
+                    </div>
+                    <div class="col-sm-12">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.datosAdicionales.$error.maxlength">La longitud máxima del campo Datos adicionales del Trámite es de 1000 caracteres.</p>
+                        <!--<p class="help-block" ng-if="controller.tramiteForm.datosAdicionales.$error.required">El campo Datos adicionales del Trámite es obligatorio.</p>-->
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.DatosAdicionales" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.DatosAdicionales">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div ng-if="!tramiteCtrl.permiteRectificar">
+                    <p>
+                        {{tramiteCtrl.tramite.DatosAdicionales}}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

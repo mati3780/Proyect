@@ -1,0 +1,18 @@
+﻿<div>
+    <div ng-show="depositoCtrl.liquidacionExiste">
+        <p>
+            A continuación podrá <span ng-if="depositoCtrl.datauri">visualizar</span><span ng-if="!depositoCtrl.datauri">descargar</span> la Liquidación.
+        </p>
+        <a class="btn btn-success" ng-if="!depositoCtrl.datauri" ng-click="depositoCtrl.descargarPdf()">Descargar Liquidación</a>
+
+        <div ng-show="depositoCtrl.pdfContent">
+            <object data="{{depositoCtrl.pdfContent}}" type="application/pdf" class="col-sm-12" style="height: 400px;"></object>
+        </div>
+    </div>
+    <div ng-show="depositoCtrl.liquidacionInexistente">
+        <span class="text-danger">Depósito no encontrado.</span>
+    </div>
+    <div class="margin-bottom">
+        <a href="#/ActualizarDepositosAcreditaciones" class="btn btn-link">Atrás</a>
+    </div>
+</div>

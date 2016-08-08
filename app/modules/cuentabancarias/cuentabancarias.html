@@ -1,0 +1,74 @@
+﻿<div ng-controller="cuentabancariasController as cuentabancariasCtrl">
+	<div class="row pull-right">
+		<a href="#/cuentabancarias/new" access="NuevaCuentaBancaria" class="btn btn-primary">Nueva Cuenta Bancaria</a>
+	</div>
+	<div class="row" style="margin: 5px 0;"></div>
+	<div class="row">
+		<table datatable="" dt-options="cuentabancariasCtrl.dtOptions" dt-columns="cuentabancariasCtrl.dtColumns" dt-instance="cuentabancariasCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>
+	</div>
+
+	<script type="text/ng-template" id="modal.html">
+		<div class="modal-header bg-primary">
+			<button type="button" class="close" ng-click="cuentabancariaMD.close()" title="Cerrar">
+				<i class="fa fa-times"></i><span class="sr-only">Cerrar</span>
+			</button>
+			<h4 class="modal-title">Cuenta Bancaria Nro: {{cuentabancariaMD.cuentabancaria.Id}}</h4>
+		</div>
+		<div class="modal-body">
+			<div ng-hide="cuentabancariaMD.cuentabancariaInexistente" class="container-fluid detalle form-horizontal">
+				<div class="col-sm-6">
+					<div class="form-group form-group-sm">
+						<label class="col-sm-4 control-label">Entidad</label>
+						<div class="col-sm-8">
+							<span>{{cuentabancariaMD.cuentabancaria.Entidad}}</span>
+						</div>
+					</div>
+					<div class="form-group form-group-sm">
+						<label class="col-sm-4 control-label">Sucursal</label>
+						<div class="col-sm-8">
+							<span>{{cuentabancariaMD.cuentabancaria.Sucursal}}</span>
+						</div>
+					</div>
+					<div class="form-group form-group-sm">
+						<label class="col-sm-4 control-label">CBU</label>
+						<div class="col-sm-8">
+							<span>{{cuentabancariaMD.cuentabancaria.CBU}}</span>
+						</div>
+					</div>
+					<div class="form-group form-group-sm">
+						<label class="col-sm-4 control-label">Fecha Vigencia</label>
+						<div class="col-sm-8">
+							<span>{{cuentabancariaMD.cuentabancaria.FechaVigencia}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group form-group-sm">
+						<label class="col-sm-4 control-label">Tipo</label>
+						<div class="col-sm-8">
+							<span>{{cuentabancariaMD.cuentabancaria.Tipo}}</span>
+						</div>
+					</div>
+					<div class="form-group form-group-sm">
+						<label class="col-sm-4 control-label">Número</label>
+						<div class="col-sm-8">
+							<span>{{cuentabancariaMD.cuentabancaria.Numero}}</span>
+						</div>
+					</div>
+					<div class="form-group form-group-sm">
+						<label class="col-sm-4 control-label">Principal</label>
+						<div class="col-sm-8">
+							<span>{{cuentabancariaMD.cuentabancaria.Principal ? "SI": "NO"}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-show="cuentabancariaMD.cuentabancaria.cuentabancariaInexistente">
+				<span class="text-danger">cuenta bancaria no encontrado.</span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" ng-click="cuentabancariaMD.close()">Cerrar</button>
+		</div>
+	</script>
+</div>

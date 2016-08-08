@@ -1,0 +1,411 @@
+﻿<div class="margin-top">
+    <div class="form-group">
+        <div class="col-sm-12 text-right" ng-if="tramiteCtrl.permiteRectificar">
+            <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.rectificarInmueble()" ng-show="!tramiteCtrl.tramite.EsRectificacionInmueble">Rectificar</button>
+            <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.anularRectificacionInmueble()" ng-hide="!tramiteCtrl.tramite.EsRectificacionInmueble">Anular</button>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Datos del Inmueble</div>
+        <div class="panel-body">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <!--IDENTIFICACION INMUEBLE-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Identificación del inmueble</div>
+                        <div class="panel-body">
+
+                            <!--MATRICULA-->
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Matricula}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                    <label class="col-sm-4 control-label">Matrícula</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="matricula" class="form-control" placeholder="Matrícula" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.Matricula" maxlength="20" />
+                                    </div>
+                                    <div class="col-sm-8 col-sm-offset-4">
+                                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.matricula.$error.required">El campo Matrícula es obligatorio</p>
+                                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.matricula.$error.exclusiveAssignment">No puede ingresar Matrícula si ya ingresó Tomo/Folio ni Tomo/Folio si ya ingresó Matrícula. Ambos campos son excluyentes y debe ingresar solo un tipo a la vez.</p>
+                                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.matricula.$error.maxlength">La longitud máxima del campo Matrícula es de 20 caracteres.</p>
+                                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Matricula" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Matricula">
+                                            {{error}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                    <label class="col-sm-4 control-label">Matrícula</label>
+                                    <div class="col-sm-8">
+                                        <span>{{tramiteCtrl.tramite.Entidad.Inmueble.Matricula}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--TOMO FOLIO-->
+                            <div class="col-sm-6">
+                                <div ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                    <table class="table width-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Tomo</th>
+                                                <th>Folio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-if="tramiteCtrl.tramite.Entidad.Inmueble.TomosFolios.length == 0">
+                                                <td colspan="2" class="text-center"><span>No posee Tomo / Folio</span></td>
+                                            </tr>
+                                            <tr ng-repeat="estado in tramiteCtrl.tramite.Entidad.Inmueble.TomosFolios">
+                                                <td style="width: 50%;">{{estado.Tomo}}</td>
+                                                <td style="width: 50%;">{{estado.Folio}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.abrirTomoFolio('POST')"><i class="fa fa-plus"></i> Agregar Tomo Folio</button>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <table class="table width-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tomo</th>
+                                                    <th>Folio</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="tramiteCtrl.tramite.Entidad.Inmueble.TomosFolios.length == 0">
+                                                    <td colspan="3" class="text-center"><span>No posee Tomo / Folio</span></td>
+                                                </tr>
+                                                <tr ng-repeat="tomoFolio in tramiteCtrl.tramite.Entidad.Inmueble.TomosFolios | filter:{ Borrado: false }">
+                                                    <td style="width: 40%;">{{tomoFolio.Tomo}}</td>
+                                                    <td style="width: 40%;">{{tomoFolio.Folio}}</td>
+                                                    <td class="column-min-width-s text-right">
+                                                        <a ng-click="tramiteCtrl.abrirTomoFolio('PUT', $index)" class="btn btn-warning btn-sm margin-right-xs" title="Rectificar"><i class="fa fa-pencil"></i></a>
+                                                        <a ng-click="tramiteCtrl.abrirTomoFolio('DELETE', $index)" class="btn btn-danger btn-sm" title="Borrar"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Detalles del inmueble</div>
+                        <div class="panel-body">
+                            <!--ZONA-->
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <!--UBICACION-->
+                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Ubicacion}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Ubicación del Inmueble</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="ubicacion" class="form-control" placeholder="Ubicación del Inmueble" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.UbicacionInmueble" ng-disabled="!tramiteCtrl.tramite.EsRectificacionInmueble" maxlength="100" />
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.ubicacion.$error.maxlength">La longitud máxima del campo Ubicación del Inmueble es de 100 caracteres.</p>
+                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.UbicacionInmueble" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.UbicacionInmueble">
+                                                {{error}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Ubicación del Inmueble</label>
+                                        <div class="col-sm-8">
+                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.UbicacionInmueble}}</span>
+                                        </div>
+                                    </div>
+                                    <!--LEGAJO-->
+                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Legajo}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Legajo / Padrón</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="legajo" class="form-control" placeholder="Legajo / Padrón" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.Legajo" required maxlength="20" />
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.legajo.$error.required">El campo Legajo / Padrón es obligatorio.</p>
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.legajo.$error.maxlength">La longitud máxima del campo Legajo / Padrón es de 20 caracteres.</p>
+                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Legajo" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Legajo">
+                                                {{error}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Legajo / Padrón</label>
+                                        <div class="col-sm-8">
+                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.Legajo}}</span>
+                                        </div>
+                                    </div>
+                                    <!--ZONA-->
+                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Zona}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Zona / Código partido / Departamento </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="zona" class="form-control" placeholder="Zona / Código partido / Departamento " ng-model="tramiteCtrl.tramite.Entidad.Inmueble.Zona" maxlength="9" />
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.zona.$error.maxlength">La longitud máxima del campo Zona / Código partido / Departamento es de 9 caracteres.</p>
+                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Zona" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Zona">
+                                                {{error}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Zona / Código partido / Departamento </label>
+                                        <div class="col-sm-8">
+                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.Zona}}</span>
+                                        </div>
+                                    </div>
+                                    <!--LOTE-->
+                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Lote}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Lote / Chacra / Quinta</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="lote" class="form-control" placeholder="Lote / Chacra / Quinta" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.Lote" required maxlength="20" />
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.lote.$error.required">El campo Lote / Chacra / Quinta es obligatorio.</p>
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.lote.$error.maxlength">La longitud máxima del campo Lote / Chacra / Quinta es de 20 caracteres.</p>
+                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Lote" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Lote">
+                                                {{error}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Lote / Chacra / Quinta</label>
+                                        <div class="col-sm-8">
+                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.Lote}}</span>
+                                        </div>
+                                    </div>
+                                    <!--MANZANA-->
+                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Manzana}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Manzana</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="inmuebleManzana" class="form-control" placeholder="Manzana" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.Manzana" required maxlength="20" />
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.inmuebleManzana.$error.required">El campo Manzana es obligatorio.</p>
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.inmuebleManzana.$error.maxlength">La longitud máxima del campo Manzana es de 20 caracteres.</p>
+                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Manzana" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Manzana">
+                                                {{error}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Manzana</label>
+                                        <div class="col-sm-8">
+                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.Manzana}}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!--UNIDAD-->
+                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.UnidadComplementaria}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Unidad Funcional / Complementaria / Polígono</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="unidad" class="form-control" placeholder="Unidad Funcional / Complementaria / Polígono" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.UnidadComplementaria" maxlength="20" />
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.unidad.$error.maxlength">La longitud máxima del campo Unidad Funcional / Complementaria / Polígono es de 20 caracteres.</p>
+                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.UnidadComplementaria" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.UnidadComplementaria">
+                                                {{error}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Unidad Funcional / Complementaria / Polígono</label>
+                                        <div class="col-sm-8">
+                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.UnidadComplementaria}}</span>
+                                        </div>
+                                    </div>
+
+                                    <!--SUPERFICIE-->
+                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Superficie}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Superficie</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" name="superficie" class="form-control" placeholder="Superficie" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.Superficie" required />
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.superficie.$error.required">El campo Superficie es obligatorio.</p>
+                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Superficie" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Superficie">
+                                                {{error}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Superficie</label>
+                                        <div class="col-sm-8">
+                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.Superficie}}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!--MEDIDA-->
+                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.UnidadMedidaId}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Unidad de Medida</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" name="unidadMedida" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.UnidadMedidaId"
+                                                    ng-options="unidadMedida.Id as unidadMedida.Descripcion for unidadMedida in tramiteCtrl.unidadesMedida">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-4">
+                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.UnidadMedidaId" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.UnidadMedidaId">
+                                                {{error}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                        <label class="col-sm-4 control-label">Unidad de Medida</label>
+                                        <div class="col-sm-8">
+                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.UnidadMedidaDescripcion}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <!--NOMENCLATURA CATASTRAL-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Nomenclatura Catastral</div>
+                                        <div class="panel-body">
+
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <!--CIRCUNSCRIPCION-->
+                                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralCircunscripcion}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                                        <label class="col-sm-4 control-label">Circunscripción / Localidad</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="circunscripcion" class="form-control" placeholder="Circunscripción / Localidad" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.NomenclaturaCatastralCircunscripcion" maxlength="3" />
+                                                        </div>
+                                                        <div class="col-sm-8 col-sm-offset-4">
+                                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.circunscripcion.$error.maxlength">La longitud máxima del campo Circunscripción / Localidad es de 3 caracteres.</p>
+                                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralCircunscripcion" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralCircunscripcion">
+                                                                {{error}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                                        <label class="col-sm-4 control-label">Circunscripción / Localidad</label>
+                                                        <div class="col-sm-8">
+                                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.NomenclaturaCatastralCircunscripcion}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--SECCION-->
+                                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralSeccion}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                                        <label class="col-sm-4 control-label">Sección</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="seccion" class="form-control" placeholder="Sección" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.NomenclaturaCatastralSeccion" required maxlength="3" />
+                                                        </div>
+                                                        <div class="col-sm-8 col-sm-offset-4">
+                                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.seccion.$error.required">El campo Sección es obligatorio.</p>
+                                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.seccion.$error.maxlength">La longitud máxima del campo Sección es de 3 caracteres.</p>
+                                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralSeccion" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralSeccion">
+                                                                {{error}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                                        <label class="col-sm-4 control-label">Sección</label>
+                                                        <div class="col-sm-8">
+                                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.NomenclaturaCatastralSeccion}}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--MANZANA-->
+                                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralManzana}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                                        <label class="col-sm-4 control-label">Manzana</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="nomenclaturaCatastralManzana" class="form-control" placeholder="Manzana" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.NomenclaturaCatastralManzana" required maxlength="3" />
+                                                        </div>
+                                                        <div class="col-sm-8 col-sm-offset-4">
+                                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.nomenclaturaCatastralManzana.$error.required">El campo Manzana es obligatorio.</p>
+                                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.nomenclaturaCatastralManzana.$error.maxlength">La longitud máxima del campo Manzana es de 3 caracteres.</p>
+                                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralManzana" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralManzana">
+                                                                {{error}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                                        <label class="col-sm-4 control-label">Manzana</label>
+                                                        <div class="col-sm-8">
+                                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.NomenclaturaCatastralManzana}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--PARCELA-->
+                                                    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralParcela}" ng-if="tramiteCtrl.tramite.EsRectificacionInmueble">
+                                                        <label class="col-sm-4 control-label">Parcela</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="parcela" class="form-control" placeholder="Parcela" ng-model="tramiteCtrl.tramite.Entidad.Inmueble.NomenclaturaCatastralParcela" maxlength="6" />
+                                                        </div>
+                                                        <div class="col-sm-8 col-sm-offset-4">
+                                                            <p class="help-block" ng-if="tramiteCtrl.tramiteForm.parcela.$error.maxlength">La longitud máxima del campo Parcela es de 6 caracteres.</p>
+                                                            <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralParcela" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.NomenclaturaCatastralParcela">
+                                                                {{error}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                                                        <label class="col-sm-4 control-label">Parcela</label>
+                                                        <div class="col-sm-8">
+                                                            <span>{{tramiteCtrl.tramite.Entidad.Inmueble.NomenclaturaCatastralParcela}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--INMUEBLE:CAUSA RECTIFICACION-->
+            <div class="panel panel-default" ng-hide="!tramiteCtrl.tramite.EsRectificacionInmueble">
+                <div class="panel-heading">Causa de la rectificación</div>
+                <div class="panel-body">
+
+                    <div class="col-sm-12">
+                        <!--INMUEBLE:CAUSA RECTIFICACION:OBSERVACION-->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.ObservacionEntidad}">
+                            <label class="col-sm-2 control-label">Observación</label>
+                            <div class="col-sm-10">
+                                <textarea name="ObservacionRectificacion" rows="4" class="form-control" ng-model="tramiteCtrl.tramite.ObservacionEntidad" maxlength="1000"></textarea>
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <p class="help-block" ng-if="tramiteCtrl.tramiteForm.ObservacionRectificacion.$error.maxlength">La longitud máxima del campo Observación es de 1000 caracteres.</p>
+                                <!--<p class="help-block" ng-if="tramiteCtrl.tramiteForm.ObservacionRectificacion.$error.required">El campo Denominación es obligatorio.</p>-->
+                                <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.ObservacionEntidad" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.ObservacionEntidad">
+                                    {{error}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--MODAL TOMO FOLIO-->
+<script type="text/ng-template" id="ModalTomoFolio.html">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">Tomo Folio</h4>
+    </div>
+    <div class="modal-body">
+        <div ng-include src="'app/modules/tramites/TomoFolio.html'"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="tomoFolioCtrl.aceptarTomoFolio()">Aceptar</button>
+        <button type="button" class="btn btn-default" ng-click="tomoFolioCtrl.cancelarTomoFolio()">Cancelar</button>
+    </div>
+</script>

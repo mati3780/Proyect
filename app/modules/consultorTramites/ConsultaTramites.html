@@ -1,0 +1,127 @@
+﻿<div>
+    <!--BUSCAR-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Buscar Trámites</div>
+            <div class="panel-body">
+                <form class="form-horizontal" name="consultaTramitesCtrl.consultaForm" novalidate>
+                    <div ng-show="consultaTramitesCtrl.ErrorBusqueda">
+                        <div class="alert alert-warning">
+                            <span>Hay errores en los campos de Búsqueda</span>
+                        </div>
+                    </div><div class="clearfix">
+                        <div class="col-sm-6 form-group form-group-sm" show-errors="{showSuccess: true}">
+                            <label class="col-sm-5 control-label">Número de Trámite</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="codigoBarra" ng-model="consultaTramitesCtrl.filtro.CodigoBarra"
+                                       pattern="^[a-fA-F0-9]{12}$">
+                            </div>
+                            <div class="col-sm-7 col-sm-offset-5">
+                                <p class="help-block" ng-if="consultaTramitesCtrl.consultaForm.codigoBarra.$error.pattern">Formato inválido para el Número de Trámite</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 form-group form-group-sm">
+                            <label class="col-sm-5 control-label">Estado Solicitud</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" name="estadoSolicitud" ng-model="consultaTramitesCtrl.filtro.EstadoSolicitud"
+                                        ng-options="estado.Id as estado.Descripcion for estado  in consultaTramitesCtrl.estadosSolicitud">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group form-group-sm">
+                        <label class="col-sm-5 control-label">Estado Trámite</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" name="estado" ng-model="consultaTramitesCtrl.filtro.Estado"
+                                    ng-options="estado.Id as estado.Descripcion for estado  in consultaTramitesCtrl.estados" ng-change="consultaTramitesCtrl.fillSelectSubEstados()">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group form-group-sm">
+                        <label class="col-sm-5 control-label">SubEstado Trámite</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" name="subEstado" ng-model="consultaTramitesCtrl.filtro.SubEstado"
+                                    ng-options="subEstado.Id as subEstado.Descripcion for subEstado  in consultaTramitesCtrl.subEstados" ,
+                                    ng-disabled="!consultaTramitesCtrl.filtro.Estado">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group form-group-sm">
+                        <label class="col-sm-5 control-label">Tipo de Documento</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" name="tipoDocumento" ng-model="consultaTramitesCtrl.filtro.TipoDocumento"
+                                    ng-options="tipoDocumento.Id as tipoDocumento.Descripcion for tipoDocumento in consultaTramitesCtrl.tipoDocumentos">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group form-group-sm" show-errors="{showSuccess: true}">
+                        <label class="col-sm-5 control-label">N° de Documento</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" name="numeroDocumento" ng-model="consultaTramitesCtrl.filtro.NumeroDocumento"
+                                   pattern="^[0-9]*$">
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-5">
+                            <p class="help-block" ng-if="consultaTramitesCtrl.consultaForm.numeroDocumento.$error.number">Sólo se aceptan caracteres numéricos</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group form-group-sm">
+                        <label class="col-sm-5 control-label">Jurisdicción</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" name="jurisdiccion" ng-model="consultaTramitesCtrl.filtro.Jurisdiccion"
+                                    ng-options="jurisdiccion.Id as jurisdiccion.Descripcion for jurisdiccion  in consultaTramitesCtrl.jurisdicciones">
+                                <option value="" ng-if="consultaTramitesCtrl.jurisdicciones.length > 1"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group form-group-sm">
+                        <label class="col-sm-5 control-label">Tipo de Jurisdicción</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" name="tipoJurisdiccion" ng-model="consultaTramitesCtrl.filtro.TipoJurisdiccion"
+                                    ng-options="tipoJurisdiccion.Id as tipoJurisdiccion.Descripcion for tipoJurisdiccion in consultaTramitesCtrl.tipoJurisdicciones"
+                                    ng-disabled="!consultaTramitesCtrl.filtro.Jurisdiccion && consultaTramitesCtrl.tipoJurisdicciones.length == 0"></select>
+                            <option value="" ng-if="consultaTramitesCtrl.tipoJurisdicciones.length > 1"></option>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 form-group form-group-sm" show-errors="{showSuccess: true}">
+                        <label class="col-sm-5 control-label">Tipo de Persona</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" name="tipoPersona" ng-model="consultaTramitesCtrl.filtro.TipoPersona"
+                                    ng-options="tipoPersona.Id as tipoPersona.Descripcion for tipoPersona  in consultaTramitesCtrl.tiposPersonas"
+                                    ng-change="consultaTramitesCtrl.fillApellidoDenominacion()">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group form-group-sm" show-errors="{showSuccess: true}">
+                        <label class="col-sm-5 control-label" ng-show="consultaTramitesCtrl.filtro.TipoPersona == null">Apellido/Denominación</label>
+                        <label class="col-sm-5 control-label" ng-show="consultaTramitesCtrl.filtro.TipoPersona === true">Apellido</label>
+                        <label class="col-sm-5 control-label" ng-show="consultaTramitesCtrl.filtro.TipoPersona === false">Denominación</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="apellidoDenominacion" ng-model="consultaTramitesCtrl.filtro.ApellidoDenominacion"
+                                   pattern="^[a-zA-Z0-9 'ñÑçÇáéíóúàèìòùâêîôûäëïöüÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÄËÏÖÜ]*$" ng-disabled="consultaTramitesCtrl.filtro.TipoPersona == null">
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-5">
+                            <p class="help-block" ng-if="consultaTramitesCtrl.consultaForm.apellidoDenominacion.$error.pattern">Se han ingresado caracteres inválidos</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 col-sm-offset-5">
+                            <button class="btn btn-primary" title="Buscar" ng-click="consultaTramitesCtrl.buscar()" busy="<i class='fa fa-spinner fa-spin'></i> Buscando..." busy-disabled="true">Buscar</button>
+                            <button class="btn btn-default" title="Limpiar" ng-click="consultaTramitesCtrl.limpiar()">Limpiar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--GRILLA-->
+    <div class="row">
+        <table datatable="" dt-options="consultaTramitesCtrl.dtOptions" dt-columns="consultaTramitesCtrl.dtColumns" dt-instance="consultaTramitesCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>
+    </div>
+</div>

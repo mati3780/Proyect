@@ -1,0 +1,65 @@
+﻿<div>
+
+    <!--BUSCAR-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Buscar Trámites</div>
+            <div class="panel-body">
+                <form class="form-horizontal" name="controller.consultaForm" novalidate ng-submit="controller.buscar()">
+                    <div ng-show="controller.ErrorBusqueda">
+                        <div class="alert alert-warning">
+                            <span>Hay errores en los campos de Búsqueda</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <!--CODIGO BARRA-->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+                            <label class="col-sm-5 control-label">Código de Barra</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="codigoBarra" placeholder="Código de Barra" ng-model="controller.filtro.NumeroTramite" pattern="^[a-fA-F0-9]{12}$">
+                            </div>
+                            <div class="col-sm-7 col-sm-offset-5">
+                                <p class="help-block" ng-if="controller.consultaForm.codigoBarra.$error.pattern">Formato inválido para el Número de Trámite</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--TIPO DOCUMENTO-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label">Tipo Doc.</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="tipoDocumento" ng-model="controller.filtro.TipoDocumento"
+                                        ng-options="tipoDocumento.Id as tipoDocumento.Descripcion for tipoDocumento in controller.tipoDocumentos">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--NUMERO DOCUMENTO-->
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+                            <label class="col-sm-5 control-label">Número Doc.</label>
+                            <div class="col-sm-7">
+                                <input type="number" class="form-control" name="numeroDocumento" placeholder="Número de Documento" ng-model="controller.filtro.NumeroDocumento" pattern="^[0-9]*$">
+                            </div>
+                            <div class="col-sm-7 col-sm-offset-5">
+                                <p class="help-block" ng-if="controller.consultaForm.numeroDocumento.$error.number">Sólo se aceptan caracteres numéricos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group form-group-sm text-right">
+                            <button type="submit" class="btn btn-primary" busy="<i class='fa fa-spinner fa-spin'></i> Buscando..." busy-disabled="true"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--GRILLA-->
+    <div class="row">
+        <table datatable="" dt-options="controller.dtOptions" dt-columns="controller.dtColumns" dt-instance="controller.dtInstance" class="row-border hover" style="width: 100%;"></table>
+    </div>
+
+</div>

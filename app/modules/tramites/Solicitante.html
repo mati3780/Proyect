@@ -1,0 +1,509 @@
+﻿<div class="margin-top">
+    <div class="form-group">
+        <div class="col-sm-12 text-right" ng-if="tramiteCtrl.permiteRectificar">
+            <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.rectificarSolicitante()" ng-show="!tramiteCtrl.tramite.EsRectificacionSolicitante">Rectificar</button>
+            <button type="button" class="btn btn-primary" ng-click="tramiteCtrl.anularRectificacionSolicitante()" ng-hide="!tramiteCtrl.tramite.EsRectificacionSolicitante">Anular</button>
+        </div>
+    </div>
+    <!--SOLICITANTE:DATOS PRINCIPALES-->
+    <div class="panel panel-default">
+        <div class="panel-heading">Datos Principales</div>
+        <div class="panel-body">
+            <div class="col-sm-6">
+
+                <!--SOLICITANTE:DATOS PRINCIPALES:APELLIDOS-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Apellido}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Apellido</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="apellido" class="form-control" placeholder="Apellido" ng-model="tramiteCtrl.tramite.Solicitante.Apellido" ng-disabled="!tramiteCtrl.tramite.EsRectificacionSolicitante" required maxlength="50" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.apellido.$error.required">El campo Apellido es obligatorio.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.apellido.$error.maxlength">La longitud máxima del campo Apellido es de 50 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Apellido" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Apellido">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Apellido</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Apellido}}</span>
+                    </div>
+                </div>
+
+                <!--SOLICITANTE:DATOS PRINCIPALES:NOMBRES-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Nombre}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Nombres</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombres" ng-model="tramiteCtrl.tramite.Solicitante.Nombre" required maxlength="50" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.nombre.$error.required">El campo Nombres es obligatorio.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.nombre.$error.maxlength">La longitud máxima del campo Nombres es de 50 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Nombre" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Nombre">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Nombres</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Nombre}}</span>
+                    </div>
+                </div>
+
+                <!--SOLICITANTE:DATOS PRINCIPALES:TIPO DOC-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.TipoDocumentoId}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Tipo Doc.</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="tipoDocumento" name="tipoDocumento" ng-model="tramiteCtrl.tramite.Solicitante.TipoDocumentoId"
+                                ng-options="tipoDocumento.Id as tipoDocumento.Descripcion for tipoDocumento in tramiteCtrl.tipoDocumentos" required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.tipoDocumento.$error.required">El campo Tipo Doc. es obligatorio.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.TipoDocumentoId" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.TipoDocumentoId">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Tipo Doc.</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.TipoDocumento.Descripcion}}</span>
+                    </div>
+                </div>
+
+                <!--SOLICITANTE:DATOS PRINCIPALES:NUMERO DOC-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.NumeroDocumento}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Número Doc.</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="numeroDocumento" class="form-control" placeholder="Número Documento" ng-model="tramiteCtrl.tramite.Solicitante.NumeroDocumento" required maxlength="11" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.documento.$error.required">El campo Número Doc. es obligatorio.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.numeroDocumento.$error.maxlength">La longitud máxima del campo Número Doc. es de 11 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.NumeroDocumento" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.NumeroDocumento">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Número Doc.</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.NumeroDocumento}}</span>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="col-sm-6">
+                <!--SOLICITANTE:DATOS PRINCIPALES:CUIT / CUIL-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Cuit}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">CUIT/CUIL</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="solicitanteCuit" class="form-control" placeholder="CUIT/CUIL" ng-model="tramiteCtrl.tramite.Solicitante.Cuit"
+                               required cuit tooltip-placement="bottom" uib-tooltip="CUIT/CUIL (sin guiones ni espacios)" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.solicitanteCuit.$error.number">El campo CUIT/CUIL. Solo se permiten caracteres numéricos.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.solicitanteCuit.$error.required">El campo CUIT/CUIL es obligatorio.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.solicitanteCuit.$error.cuit">El campo CUIT/CUIL no contiene un CUIT/CUIL válido. Verifíquelo e ingréselo nuevamente</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Cuit" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Cuit">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">CUIT/CUIL</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Cuit}}</span>
+                    </div>
+                </div>
+
+                <!--SOLICITANTE:DATOS PRINCIPALES:TELEFONO-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Telefono}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Teléfono</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="telefono" class="form-control" placeholder="Telefono" ng-model="tramiteCtrl.tramite.Solicitante.Telefono" maxlength="20"/>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.telefono.$error.maxlength">La longitud máxima del campo Teléfono es de 20 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Telefono" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Telefono">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Teléfono</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Telefono}}</span>
+                    </div>
+                </div>
+
+                <!--SOLICITANTE:DATOS PRINCIPALES:TELEFONO MOVIL-->
+                <!--<div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.TelefonoMovil}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Teléfono Movil</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="telefonoMovil" class="form-control" placeholder="TelefonoMovil" ng-model="tramiteCtrl.tramite.Solicitante.TelefonoMovil" maxlength="20"/>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.telefonoMovil.$error.maxlength">La longitud máxima del campo Teléfono Movil es de 20 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.TelefonoMovil" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.TelefonoMovil">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Teléfono Movil</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.TelefonoMovil}}</span>
+                    </div>
+                </div>-->
+                <!--SOLICITANTE:DATOS PRINCIPALES:EMAIL1-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Email1}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" name="email1" class="form-control" placeholder="Correo Electrónico" ng-model="tramiteCtrl.tramite.Solicitante.Email1" required maxlength="100"/>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.email1.$error.required">El campo Email es obligatorio</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.email1.$error.email">El campo Email es inválido</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.email1.$error.maxlength">La longitud máxima del campo Correo Electrónico es de 100 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Email1" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Email1">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Email1}}</span>
+                    </div>
+                </div>
+
+                <!--SOLICITANTE:DATOS PRINCIPALES:EMAIL2-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Email2}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Email 2</label>
+                    <div class="col-sm-8">
+                        <input type="email" name="email2" class="form-control" placeholder="Correo Electrónico 2" ng-model="tramiteCtrl.tramite.Solicitante.Email2" maxlength="100"/>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.email2.$error.email">El campo Email 2 es inválido.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.email2.$error.maxlength">La longitud máxima del campo Email 2 es de 100 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Email2" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Email2">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Email 2</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Email2}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--SOLICITANTE:DIRECCION-->
+    <div class="panel panel-default">
+        <div class="panel-heading">Dirección</div>
+        <div class="panel-body">
+
+            <div class="col-sm-6">
+                <!--SOLICITANTE:DIRECCION:DOMICILIO-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Domicilio}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Dirección</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="domicilio" class="form-control" placeholder="Dirección" ng-model="tramiteCtrl.tramite.Solicitante.Domicilio" maxlength="250" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.domicilio.$error.required">El campo Dirección es obligatorio.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.domicilio.$error.maxlength">La longitud máxima del campo Dirección es de 250 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Domicilio" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Domicilio">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Dirección</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Domicilio}}</span>
+                    </div>
+                </div>
+
+                <!--SOLICITANTE:DIRECCION:CODIGO POSTAL-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.CodigoPostal}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Código Postal</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="codigopostal" class="form-control" placeholder="Código Postal" tooltip-placement="bottom"
+                               uib-tooltip-template="'tooltipCP.html'" pattern="^(\d{4}|[A-HJ-TP-Z]{1}\d{4}[A-Z]{3}|[a-z]{1}\d{4}[a-hj-tp-z]{3})$" required
+                               ng-model="tramiteCtrl.tramite.Solicitante.CodigoPostal" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.codigopostal.$error.required">El campo Código Postal es obligatorio.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.codigopostal.$error.pattern">El campo Código Postal es inválido. Formatos permitidos: 9999 (CP antiguo) ó X9999YYY (Nuevo CPA)</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.CodigoPostal" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.CodigoPostal">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Código Postal</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.CodigoPostal}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!--SOLICITANTE:DIRECCION:PROVINCIA-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.ProvinciaId}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Provincia</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="provincia" ng-model="tramiteCtrl.tramite.Solicitante.ProvinciaId"
+                                ng-options="provincia.Id as provincia.Descripcion for provincia in tramiteCtrl.provincias"
+                                ng-change="tramiteCtrl.fillSelectLocalidades()" required>
+                            <option value="">Seleccione Provincia</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.provincia.$error.required">El campo Provincia es obligatorio</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.ProvinciaId" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.ProvinciaId">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Provincia</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Provincia.Descripcion}}</span>
+                    </div>
+                </div>
+
+                <!--SOLICITANTE:DIRECCION:LOCALIDAD-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.LocalidadId}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Localidad</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="localidad" ng-model="tramiteCtrl.tramite.Solicitante.LocalidadId"
+                                ng-options="localidad.Id as localidad.Descripcion for localidad in tramiteCtrl.localidades" required>
+                            <option value="">Seleccione Localidad</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.localidad.$error.required">El campo Localidad es obligatorio</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.LocalidadId" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.LocalidadId">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Localidad</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Localidad.Descripcion}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--SOLICITANTE:PROFESION-->
+    <div class="panel panel-default">
+        <div class="panel-heading">Profesión</div>
+        <div class="panel-body">
+
+            <div class="col-sm-6">
+                <!--SOLICITANTE:PROFESION:PROFESION-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Profesion}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Profesión</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="profesion" name="profesion" ng-model="tramiteCtrl.tramite.Solicitante.ProfesionId"
+                                ng-options="profesion.Id as profesion.Descripcion for profesion in tramiteCtrl.profesiones" required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.profesion.$error.required">El campo Profesión es obligatorio.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Profesion" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Profesion">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Profesión</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Profesion.Descripcion}}</span>
+                    </div>
+                </div>
+                <!--SOLICITANTE:PROFESION:TOMO-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Tomo}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Tomo/Año/Libro</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="tomo" class="form-control" placeholder="Tomo" ng-model="tramiteCtrl.tramite.Solicitante.Tomo" maxlength="4" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.tomo.$error.maxlength">La longitud máxima del campo Tomo/Año/Libro es de 4 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Tomo" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Tomo">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Tomo/Año/Libro</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Tomo}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!--SOLICITANTE:PROFESION:MATRICULA-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Matricula}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Matrícula</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="solicitanteMatricula" class="form-control" placeholder="Matricula" ng-model="tramiteCtrl.tramite.Solicitante.Matricula" maxlength="40" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.solicitanteMatricula.$error.required">El campo Matrícula es obligatorio.</p>
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.solicitanteMatricula.$error.maxlength">La longitud máxima del campo Matrícula es de 40 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Matricula" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Matricula">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Matrícula</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Matricula}}</span>
+                    </div>
+                </div>
+                <!--SOLICITANTE:PROFESION:FOLIO-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.Folio}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Folio</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="folio" class="form-control" placeholder="Folio" ng-model="tramiteCtrl.tramite.Solicitante.Folio" maxlength="100" />
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.folio.$error.maxlength">La longitud máxima del campo Folio es de 100 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.Folio" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.Folio">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-4 control-label">Folio</label>
+                    <div class="col-sm-8">
+                        <span>{{tramiteCtrl.tramite.Solicitante.Folio}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <!--SOLICITANTE:PROFESION:DATOS-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.DatosMatriculacion}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-2 control-label">Datos de la Matriculación</label>
+                    <div class="col-sm-10">
+                        <textarea name="datosMatriculacion" rows="4" class="form-control" ng-model="tramiteCtrl.tramite.Solicitante.DatosMatriculacion" maxlength="1000"></textarea>
+                    </div>
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.datosMatriculacion.$error.maxlength">La longitud máxima del campo Datos de la Matriculación es de 1000 caracteres.</p>
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.DatosMatriculacion" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.DatosMatriculacion">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-2 control-label">Datos de la Matriculación</label>
+                    <div class="col-sm-10">
+                        <span>{{tramiteCtrl.tramite.Solicitante.DatosMatriculacion}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--SOLICITANTE:OTROS-->
+    <div class="panel panel-default">
+        <div class="panel-heading">Otros</div>
+        <div class="panel-body">
+
+            <div class="col-sm-12">
+                <!--SOLICITANTE:OTROS:REPARTICION SOLICITANTE-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.ReparticionSolicitanteId}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-2 control-label">Repartición Solicitante</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="reparticion" name="reparticion" ng-model="tramiteCtrl.tramite.ReparticionSolicitanteId"
+                                ng-options="reparticion.Id as reparticion.Descripcion for reparticion in tramiteCtrl.reparticionesSolicitantes">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.ReparticionSolicitanteId" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.ReparticionSolicitanteId">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-2 control-label">Repartición Solicitante</label>
+                    <div class="col-sm-10">
+                        <span>{{tramiteCtrl.tramite.ReparticionSolicitante.Descripcion}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <!--SOLICITANTE:OTROS:MOTIVO-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.MotivoConsulta}" ng-if="tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-2 control-label">Motivo de Consulta</label>
+                    <div class="col-sm-10">
+                        <textarea name="motivoConsulta" rows="4" class="form-control" ng-model="tramiteCtrl.tramite.MotivoConsulta" maxlength="1000"></textarea>
+                    </div>
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <p class="help-block" ng-if="tramiteCtrl.tramiteForm.motivoConsulta.$error.maxlength">La longitud máxima del campo Motivo de Consulta es de 1000 caracteres.</p>
+                        <!--<p class="help-block" ng-if="tramiteCtrl.tramiteForm.motivoConsulta.$error.required">El campo Denominación es obligatorio.</p>-->
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.MotivoConsulta" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.MotivoConsulta">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm" ng-if="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+                    <label class="col-sm-2 control-label">Motivo de Consulta</label>
+                    <div class="col-sm-10">
+                        <span>{{tramiteCtrl.tramite.MotivoConsulta}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--SOLICITANTE:CAUSA RECTIFICACION-->
+    <div class="panel panel-default" ng-hide="!tramiteCtrl.tramite.EsRectificacionSolicitante">
+        <div class="panel-heading">Causa de la rectificación</div>
+        <div class="panel-body">
+
+            <div class="col-sm-12">
+                <!--SOLICITANTE:CAUSA RECTIFICACIONOBSERVACION-->
+                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': tramiteCtrl.validationErrors.elementErrors.ObservacionSolicitante}">
+                    <label class="col-sm-2 control-label">Observación</label>
+                    <div class="col-sm-10">
+                        <textarea name="observacionSolicitante" rows="4" class="form-control" ng-model="tramiteCtrl.tramite.ObservacionSolicitante"></textarea>
+                    </div>
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <span class="help-block" ng-if="tramiteCtrl.validationErrors.elementErrors.ObservacionSolicitante" ng-repeat="error in tramiteCtrl.validationErrors.elementErrors.ObservacionSolicitante">
+                            {{error}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/ng-template" id="tooltipCP.html">
+    <span>Formatos permitidos:<br />1) 9999 - CP Antiguo<br />2) X9999YYY - Nuevo CPA</span>
+</script>

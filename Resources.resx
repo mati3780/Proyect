@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Validacion_NoHabilitadoASistema" xml:space="preserve">
+    <value>El usuario no está habilitado para ingresar al sistema.</value>
+  </data>
+  <data name="Validacion_SinJurisdiccionAsignada" xml:space="preserve">
+    <value>El usuario no está asignado a ninguna jurisdicción</value>
+  </data>
+  <data name="Validacion_UsuarioIncorrecto" xml:space="preserve">
+    <value>El usuario o contraseña son incorrectos</value>
+  </data>
+  <data name="Validacion_UsuarioMasDeUnaJurisdiccionAsignada" xml:space="preserve">
+    <value>El usuario puede tener solamente una (1) jurisdicción asignada</value>
+  </data>
+  <data name="Validacion_UsuarioNoPuedeEliminar" xml:space="preserve">
+    <value>El usuario no tiene permiso para eliminar {0}</value>
+  </data>
+  <data name="Validacion_UsuarioNoPuedeHacerCambios" xml:space="preserve">
+    <value>El usuario no tiene permiso para modificar {0}</value>
+  </data>
+  <data name="Validacion_UsuarioNoPuedeObtener" xml:space="preserve">
+    <value>El usuario no tiene permiso para obtener {0}</value>
+  </data>
+  <data name="Validacion_JurisdiccionDescripcionYaExiste" xml:space="preserve">
+    <value>Ya existe una jurisdicción con la misma denominación para la provincia seleccionada</value>
+  </data>
+  <data name="Validacion_JurisdiccionLocalidad" xml:space="preserve">
+    <value>Ya existe una jurisdicción para la localidad seleccionada</value>
+  </data>
+  <data name="Validacion_JurisdiccionSiglaYaExiste" xml:space="preserve">
+    <value>Ya existe una jurisdiccion con la misma sigla</value>
+  </data>
+  <data name="Validacion_RegistroYaExiste" xml:space="preserve">
+    <value>Ya existe un elemento que cumple con los parámetros enviados</value>
+  </data>
+  <data name="Validacion_Requerido" xml:space="preserve">
+    <value>El campo {0} es requerido</value>
+  </data>
+  <data name="Validacion_FechaMinima" xml:space="preserve">
+    <value>La fecha ingresada no está en el rango permitido</value>
+  </data>
+  <data name="Validacion_FechaNoEditable" xml:space="preserve">
+    <value>No puede modificar Feriados anteriores a la fecha actual o dentro del plazo de días para los trámites</value>
+  </data>
+  <data name="Validacion_GreaterThan" xml:space="preserve">
+    <value>El campo {0} debe ser mayor que {1}</value>
+  </data>
+  <data name="LessThan" xml:space="preserve">
+    <value>El campo {0} debe ser menor que {1}</value>
+  </data>
+  <data name="Validacion_GreaterThanOrEqualTo" xml:space="preserve">
+    <value>El campo {0} debe ser mayor o igual que {1}</value>
+  </data>
+  <data name="Validacion_LessThanOrEqualTo" xml:space="preserve">
+    <value>El campo {0} debe ser menor o igual que {1}</value>
+  </data>
+  <data name="Validacion_PlazoCerrado" xml:space="preserve">
+    <value>Plazo del Tramite cerrardo anteriormente</value>
+  </data>
+  <data name="Validacion_PlazoVigenciaDesdeDentroDePeriodoInvalido" xml:space="preserve">
+    <value>La Fecha de Vigencia Desde se superpone con el periodo de vigencia del Tipo de Plazo de Trámite anterior</value>
+  </data>
+  <data name="Validacion_ValidDate" xml:space="preserve">
+    <value>El campo {0} no es una fecha valida</value>
+  </data>
+  <data name="Validacion_Invalid" xml:space="preserve">
+    <value>El campo {0} no es valido</value>
+  </data>
+  <data name="Validacion_InvalidJurisdiccion" xml:space="preserve">
+    <value>Jurisdicción invalida</value>
+  </data>
+  <data name="Validacion_JurisdiccionProvincia" xml:space="preserve">
+    <value>Ya Existe una jurisdiccion para la provincia seleccionada</value>
+  </data>
+  <data name="Validacion_NoExisteElementoA" xml:space="preserve">
+    <value>La {0} indicada no existe</value>
+  </data>
+  <data name="Validacion_NoExisteElementoB" xml:space="preserve">
+    <value>El {0} indicado no existe</value>
+  </data>
+  <data name="Validacion_LocalidadProvincia" xml:space="preserve">
+    <value>La localidad no pertenece a la provincia seleccionada</value>
+  </data>
+  <data name="Validacion_JurisdiccionInhabilitada" xml:space="preserve">
+    <value>Su jurisdicción no está habilitada para ingresar al sistema.</value>
+  </data>
+  <data name="Validacion_TramiteDatoParametroCondicionFaltante" xml:space="preserve">
+    <value>Alguno de los elementos enviados no tiene asignada una condición o la misma es inexistente</value>
+  </data>
+  <data name="Validacion_TramiteDatoParametroFaltante" xml:space="preserve">
+    <value>El tipo de trámite requiere mas datos de configuración que los enviados.</value>
+  </data>
+  <data name="Validacion_TramiteDatoParametroLabelFaltante" xml:space="preserve">
+    <value>Alguno de los elementos enviados no tiene asignado un nombre</value>
+  </data>
+  <data name="Validacion_TramiteDatoParametroLabelExcede" xml:space="preserve">
+    <value>Alguno de los elementos enviados excede el tamaño máximo para el nombre</value>
+  </data>
+  <data name="Validacion_EstadoTramiteInvalido" xml:space="preserve">
+    <value>El Estado del trámite no permite realizar la operación</value>
+  </data>
+  <data name="Validacion_TasaNacionalVigenciaDesdeDentroDePeriodoInvalido" xml:space="preserve">
+    <value>La Fecha de Vigencia Desde se superpone con el periodo de vigencia de la tasa PROYECT anterior</value>
+  </data>
+  <data name="Validacion_TramiteDatoNomenclatura" xml:space="preserve">
+    <value>Los requerimientos en nomenclatura catastral difieren entre si. Esta configuración es conjunta y deberían ser configurados con la misma condición.</value>
+  </data>
+  <data name="Validacion_TramiteDatoMatriculaConflico" xml:space="preserve">
+    <value>No se ha configurado matrícula o tomo y folio correctamente o, existe un conflicto en su configuración. Recuerde que almenos una debe ser obligatoria.</value>
+  </data>
+  <data name="Validacion_TramiteDatoTomoFolioConflicto" xml:space="preserve">
+    <value>El tomo y el folio deben ser configurados con la misma condicion.</value>
+  </data>
+  <data name="Etiqueta_FechaEntregaDocEnTramite" xml:space="preserve">
+    <value>Suspendido</value>
+  </data>
+  <data name="Etiqueta_FechaEntregaObservado" xml:space="preserve">
+    <value>Interrumpida</value>
+  </data>
+  <data name="Etiqueta_AvisoRetiroTramite" xml:space="preserve">
+    <value>PROYECT - Aviso de Retiro de Trámite N° {0} al Solicitante </value>
+  </data>
+  <data name="Etiqueta_AvisoInformeEstadoTramite" xml:space="preserve">
+    <value>PROYECT - Informe del Estado del Tramite N° {0}"</value>
+  </data>
+  <data name="Etiqueta_AvisoObservacionTramite" xml:space="preserve">
+    <value>PROYECT - Aviso de Trámite Observado al Solicitante N° {0}</value>
+  </data>
+  <data name="Etiqueta_AvisoEntregaTramite" xml:space="preserve">
+    <value>PROYECT - Aviso de Entrega de Trámite N° {0}</value>
+  </data>
+  <data name="Validacion_CuitCuilInvalido" xml:space="preserve">
+    <value>El campo CUIT/CUIL no contiene un CUIT/CUIL válido. Verifíquelo e ingréselo nuevamente</value>
+  </data>
+  <data name="Validacion_TamanoMaximo" xml:space="preserve">
+    <value>La longitud máxima del campo {0} es de {1} caracteres</value>
+  </data>
+  <data name="Validacion_LiquidacionesSumarizadas" xml:space="preserve">
+    <value>Las liquidaciones seleccionadas no sumarizan un valor correcto para compensar.</value>
+  </data>
+  <data name="Validacion_LiquidacionInvalida" xml:space="preserve">
+    <value>Liquidación inválida.</value>
+  </data>
+  <data name="Validacion_Fecha" xml:space="preserve">
+    <value>La fecha tiene un formato inválido.</value>
+  </data>
+  <data name="Validacion_LiquidacionInvalida_ExistenOtras" xml:space="preserve">
+    <value>Compensación Inválida. Para poder compensar estas liquidaciones, debe resolver las liquidaciones pendientes existentes.</value>
+  </data>
+</root>

@@ -1,0 +1,44 @@
+﻿<div ng-controller="feriadoController as feriadoCtrl">
+	<div ng-hide="feriadoCtrl.feriadoInexistente">
+		<form name="feriadoCtrl.feriadoForm" novalidate ng-submit="feriadoCtrl.guardar()" >
+			<div class="row alert alert-danger" ng-if="feriadoCtrl.validationErrors.formErrors.length > 0">
+				<ul>
+					<li ng-repeat="formError in feriadoCtrl.validationErrors.formErrors">
+						<span>{{formError}}</span>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-3 form-group" show-errors="{showSuccess: true}" ng-class="{'has-error': feriadoCtrl.validationErrors.elementErrors.Fecha}">
+					<label>Fecha</label>
+					<div class="input-group" ng-show="feriadoCtrl.feriado.Id == 0">
+						<input type="text" name="fecha" datetime-picker class="form-control" ng-model="feriadoCtrl.feriado.Fecha" aria-describedby="fecha-addon" required/>
+						<span class="input-group-addon glyphicon glyphicon-calendar" style="margin-top: 0;" id="fecha-addon" aria-hidden="true"></span>
+					</div>
+					<span ng-show="feriadoCtrl.feriado.Id != 0">{{feriadoCtrl.feriado.Fecha}}</span>
+					<p class="help-block" ng-if="feriadoCtrl.feriadoForm.fecha.$error.required">El campo Fecha es obligatorio.</p>
+					<span class="help-block" ng-if="feriadoCtrl.validationErrors.elementErrors.Fecha" ng-repeat="error in feriadoCtrl.validationErrors.elementErrors.Fecha">
+						{{error}}
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="form-group" show-errors="{showSuccess: true}">
+						<label>Descripción</label>
+						<input type="text" name="descripcion" class="form-control" ng-model="feriadoCtrl.feriado.Descripcion" placeholder="Descripción" required maxlength="250"/>
+						<p class="help-block" ng-if="feriadoCtrl.feriadoForm.descripcion.$error.required">El campo Descripción es obligatorio.</p>
+						<p class="help-block" ng-if="feriadoCtrl.feriadoForm.descripcion.$error.maxlength">El campo Descripción no puede exceder los 250 caracteres.</p>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" busy="<i class='fa fa-spinner fa-spin'></i> Guardando..." busy-disabled="true">Guardar</button>
+				<a href="#/feriados" class="btn btn-link">Cancelar</a>
+			</div>
+		</form>
+	</div>
+	<div ng-show="feriadoCtrl.feriadoInexistente">
+		<span class="text-danger">Feriado no encontrado.</span>
+	</div>
+</div>

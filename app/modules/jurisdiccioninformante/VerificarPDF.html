@@ -1,0 +1,25 @@
+﻿<div class="row">
+    <div ng-show="tramiteCtrl.tramiteExiste">
+        <form name="tramiteCtrl.tramiteForm" class="form-horizontal">
+
+            <div id="verPDF">
+                <a class="btn btn-success" ng-if="!tramiteCtrl.datauri" ng-click="tramiteCtrl.descargarSolicitud()">Descargar Pdf</a>
+                <div ng-show="tramiteCtrl.pdfContent">
+                    <object data="{{tramiteCtrl.pdfContent}}" type="application/pdf" class="col-sm-12" style="height: 400px;"></object>
+                </div>
+            </div>
+
+            <div class="row margin-bottom">
+                <div class="col-sm-12 margin-top">
+                    <button class="btn btn-primary" ng-click="tramiteCtrl.aceptar()">Aceptar</button>
+                    <button class="btn btn-danger" ng-click="tramiteCtrl.anular()">Anular PDF</button>
+                    <a href="#/jurisdiccionInformante/{{tramiteCtrl.tramite.Id}}" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div ng-show="tramiteCtrl.tramiteInexistente">
+        <span class="text-danger">Trámite no encontrado.</span>
+    </div>
+</div>

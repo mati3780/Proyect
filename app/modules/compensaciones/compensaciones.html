@@ -1,0 +1,103 @@
+﻿<div>
+    <!--BUSCAR-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Buscar Compensaciones</div>
+            <div class="panel-body">
+                <form class="form-horizontal" ng-submit="compensacionesCtrl.buscar()">
+                    <div class="col-md-3">
+                        <!--FECHA DESDE-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-6 control-label">Fecha Desde</label>
+                            <div class="col-sm-6">
+                                <input type="datetime" class="form-control" placeholder="Fecha Desde" datetime-picker ng-model="compensacionesCtrl.filtro.FechaDesde" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--FECHA HASTA-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-6 control-label">Fecha Hasta</label>
+                            <div class="col-sm-6">
+                                <input type="datetime" class="form-control" placeholder="Fecha Hasta" datetime-picker ng-model="compensacionesCtrl.filtro.FechaHasta" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="compensacionesCtrl.esProyect">
+                        <!--JURISDICCIONES-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Jurisdicción</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="jurisdiccion" ng-model="compensacionesCtrl.filtro.JurisdiccionId"
+                                        ng-options="jurisdiccion.Id as jurisdiccion.Descripcion for jurisdiccion in compensacionesCtrl.jurisdicciones">
+                                    <option value="">Seleccione la jurisdicción</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group form-group-sm text-right">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--GRILLA-->
+<div class="row">
+    <table datatable="" dt-options="compensacionesCtrl.dtOptions" dt-columns="compensacionesCtrl.dtColumns" dt-instance="compensacionesCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>
+</div>
+
+    <!--MODAL VER-->
+    <script type="text/ng-template" id="modal.html">
+        <div class="modal-header bg-primary">
+            <button type="button" class="close" ng-click="compensacionMD.close()" title="Cerrar">
+                <i class="fa fa-times"></i><span class="sr-only">Cerrar</span>
+            </button>
+            <h4 class="modal-title">Compensación N. {{compensacionMD.compensacion}}</h4>
+        </div>
+        <div class="modal-body">
+            <div ng-hide="compensacionMD.jurisdiccionInexistente" class="container-fluid detalle form-horizontal">
+                <!--DATOS PRINCIPALES-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Detalle Liquidaciones Compensadas</div>
+                    <div class="panel-body">
+                        <div>
+                            <table class="table margin-bottom-no width-100">
+                                <thead>
+                                    <tr>
+                                        <th>Límite Depósito</th>
+                                        <th>Movimiento</th>
+                                        <th>Origen</th>
+                                        <th>Destino</th>
+                                        <th>Importe</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="dato in compensacionMD.datos" ng-class="{semaforoRojo : (dato.MovimientoEnumValue === 2), semaforoVerde : (dato.MovimientoEnumValue === 1)}">
+                                        <td>{{dato.Fecha}}</td>
+                                        <td>{{dato.Movimiento}}</td>
+                                        <td>{{dato.Origen}}</td>
+                                        <td>{{dato.Destino}}</td>
+                                        <td class="text-right">{{dato.Importe}}</td>
+                                    </tr>
+                                    <tr ng-if="compensacionMD.datos.length > 0" class="info">
+                                                                           </tr>
+                            </table>
+                        </div>
+
+
+                        <div ng-show="compensacionMD.jurisdiccionInexistente">
+                            <span class="text-danger">Jurisdicción no encontrado.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="compensacionMD.close()">Cerrar</button>
+        </div>
+    </script>
+</div>

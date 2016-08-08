@@ -1,0 +1,27 @@
+﻿<div>
+	<form name="loginCtrl.form" novalidate ng-submit="loginCtrl.login()">
+		<div >
+			<br/>
+			<div class="col-sm-4 col-sm-offset-4" >
+				<div class="form-group" ng-class="{'has-error': loginCtrl.error}" show-errors="{showSuccess: true}">
+					<label>Usuario</label>
+					<input type="text" class="form-control" name="username" ng-model="loginCtrl.username" placeholder="Usuario" required />
+					<p class="help-block" ng-if="loginCtrl.form.username.$error.required">El campo Usuario es obligatorio</p>
+				</div>
+				<div class="form-group" ng-class="{'has-error': loginCtrl.error}" show-errors="{showSuccess: true}">
+					<label>Contraseña</label>
+					<input type="password" class="form-control" name="password" ng-model="loginCtrl.password" placeholder="Contraseña" required/>
+					<p class="help-block" ng-if="loginCtrl.form.password.$error.required">El campo Contraseña es obligatorio</p>
+				</div>
+				<div class="has-error">
+					<span class="help-block" ng-if="loginCtrl.error">{{loginCtrl.error}}</span>
+				</div>
+				<div class="">
+					<button type="submit" class="btn btn-primary" busy="<i class='fa fa-spinner fa-spin'></i> Ingresar" busy-disabled="true">
+						<i class="fa fa-fw fa-sign-in"></i> Ingresar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

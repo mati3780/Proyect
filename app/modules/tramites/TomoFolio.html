@@ -1,0 +1,38 @@
+﻿<form name="tomoFolioCtrl.tomoFolioForm" class="form-horizontal" novalidate ng-submit="tomoFolioCtrl.aceptarTomoFolio()">
+    <div class="col-sm-6">
+        <!--TOMO-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-4 control-label">Tomo</label>
+            <div class="col-sm-8">
+                <input type="text" name="tomoFolioTomo" class="form-control" placeholder="Tomo" ng-model="tomoFolioCtrl.tomoFolio.Tomo" maxlength="4" ng-disabled="tomoFolioCtrl.action === 'DELETE'"/>
+            </div>
+            <div class="col-sm-8 col-sm-offset-4">
+                <p class="help-block" ng-if="tomoFolioCtrl.tomoFolioForm.tomoFolioTomo.$error.maxlength">La longitud máxima del campo Tomo es de 4 caracteres.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <!--FOLIO-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-4 control-label">Folio</label>
+            <div class="col-sm-8">
+                <input type="text" name="tomoFolioFolio" class="form-control" placeholder="Folio" ng-model="tomoFolioCtrl.tomoFolio.Folio" maxlength="4" ng-disabled="tomoFolioCtrl.action === 'DELETE'"/>
+            </div>
+            <div class="col-sm-8 col-sm-offset-3">
+                <p class="help-block" ng-if="tomoFolioCtrl.tomoFolioForm.tomoFolioFolio.$error.maxlength">La longitud máxima del campo Folio es de 4 caracteres.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12" ng-if="tomoFolioCtrl.action !== 'POST'">
+        <!--OBSERVACION-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-2 control-label">Observación</label>
+            <div class="col-sm-10">
+                <textarea name="tomoFolioObservacion" rows="4" class="form-control" ng-model="tomoFolioCtrl.tomoFolio.Observacion" required></textarea>
+            </div>
+            <div class="col-sm-10 col-sm-offset-2">
+                <p class="help-block" ng-if="tomoFolioCtrl.tomoFolioForm.tomoFolioObservacion.$error.required">El campo Observación es obligatorio.</p>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,76 @@
+﻿<div class="row">
+    <div ng-show="tramiteCtrl.tramiteExiste">
+        <form name="tramiteCtrl.tramiteForm" class="form-horizontal">
+            <!--TABS-->
+            <uib-tabset active="active">
+                <!--DATOS DEL PAGO-->
+                <uib-tab index="0" heading="Datos del Pago">
+                    <div ng-include src="'app/modules/tramites/Pago.html'"></div>
+                </uib-tab>
+
+                <!--SOLICITANTE-->
+                <uib-tab index="1" heading="Solicitante">
+                    <div ng-include src="'app/modules/tramites/Solicitante.html'"></div>
+                </uib-tab>
+
+                <!--SOLICITUD-->
+                <uib-tab index="2" heading="Solicitud">
+                    <div ng-include src="'app/modules/tramites/Solicitud.html'"></div>
+                </uib-tab>
+
+                <!--PERSONA-->
+                <uib-tab index="3" heading="Persona" ng-if="tramiteCtrl.tramite.Entidad.Persona">
+                    <div ng-include src="'app/modules/tramites/Persona.html'"></div>
+                </uib-tab>
+
+                <!--INMUEBLE-->
+                <uib-tab index="4" heading="Inmueble" ng-if="tramiteCtrl.tramite.Entidad.Inmueble">
+                    <div ng-include src="'app/modules/tramites/Inmueble.html'"></div>
+                </uib-tab>
+
+                <!--TITULAR PESONA JURIDICA-->
+                <uib-tab index="5" heading="Titular Persona Jurídica" ng-if="tramiteCtrl.showTabTitularPersonaJuridica">
+                    <div ng-include src="'app/modules/tramites/TitularPersonaJuridica.html'"></div>
+                </uib-tab>
+
+                <!--TITULAR PERSONA FISICA-->
+                <uib-tab index="6" heading="Titular Persona Humana" ng-if="tramiteCtrl.showTabTitularPersonaFisica">
+                    <div ng-include src="'app/modules/tramites/TitularPersonaFisica.html'"></div>
+                </uib-tab>
+
+                <!--DATOS ADICIONALES-->
+                <uib-tab index="7" heading="Datos Adicionales">
+                    <div ng-include src="'app/modules/tramites/Observacion.html'"></div>
+                </uib-tab>
+
+                <!--ARCHIVO PDF-->
+                <uib-tab index="8" heading="Ver Informe" ng-show="tramiteCtrl.file">
+                    <div class="margin-top">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Ver Informe</div>
+                            <div class="panel-body">
+                                <p>
+                                    A continuación podrá <span ng-if="tramiteCtrl.datauri">visualizar</span><span ng-if="!tramiteCtrl.datauri">descargar</span> el informe adjunto al trámite
+                                </p>
+                                <a class="btn btn-success" ng-if="!tramiteCtrl.datauri" ng-click="tramiteCtrl.descargarSolicitud()">Descargar Informe</a>
+
+                                <div ng-show="tramiteCtrl.pdfContent">
+                                    <object data="{{tramiteCtrl.pdfContent}}" type="application/pdf" class="col-sm-12" style="height: 400px;"></object>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </uib-tab>
+            </uib-tabset>
+
+            <div class="margin-bottom">
+                <a href="#/consultorTramites" class="btn btn-link">Atrás</a>
+            </div>
+
+        </form>
+    </div>
+    <div ng-show="tramiteCtrl.tramiteInexistente">
+        <span class="text-danger">Solicitud no encontrada.</span>
+    </div>
+</div>

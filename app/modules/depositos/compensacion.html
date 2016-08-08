@@ -1,0 +1,212 @@
+﻿<div>
+    <div ng-if="depositoCtrl.liquidacionExiste">
+
+        <!--BOTONERA-->
+        <!--<div class="margin-bottom text-right" ng-if="depositoCtrl.liquidacion.ExistePdfDeposito || depositoCtrl.liquidacion.ExistePdfConciliacion">
+            <a class="btn btn-primary" ng-href="#/ActualizarDepositosAcreditaciones/{{depositoCtrl.liquidacion.Id}}/verPDFDeposito" title="Ver PDF Depósito"
+               ng-if="depositoCtrl.liquidacion.ExistePdfDeposito">Ver PDF Depósito</a>
+        </div>-->
+
+        <form name="depositoCtrl.depositoForm" class="form-horizontal" novalidate ng-submit="depositoCtrl.guardarReciboDeposito(depositoCtrl.liquidacion.reciboDepositoFile)">
+            <!--VALIDATION SUMMARY-->
+            <div class="row alert alert-danger" ng-if="depositoCtrl.validationErrors.formErrors.length > 0">
+                <ul>
+                    <li ng-repeat="formError in depositoCtrl.validationErrors.formErrors">
+                        <span>{{formError}}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Detalles de la Compensación</div>
+                <div class="panel-body">
+
+                    <div class="col-sm-12">
+                        <!--JURISDISCCION-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Jurisdicción Destino</label>
+                            <div class="col-sm-8">
+                                <span>{{depositoCtrl.liquidacion.Sigla}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <!--IMPORTE-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Importe Compensación</label>
+                            <div class="col-sm-8">
+                                <span> {{depositoCtrl.liquidacion.Importe}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12" ng-if="depositoCtrl.liquidacion.Importe > 0">
+                        <!--DEPOSITO-->
+                        <div class="panel panel-primary margin-top-s">
+                            <div class="panel-heading">Detalles del depósito</div>
+                            <div class="panel-body">
+                                <div>
+                                    <div class="col-sm-12">
+                                        <!--CUENTA BANCARIA-->
+                                        <div class="panel panel-info margin-top-s">
+                                            <div class="panel-heading">Cuenta Bancaria destinataria</div>
+                                            <div class="panel-body">
+                                                <table class="table table-condensed margin-bottom-no width-100">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Entidad</th>
+                                                        <th>Sucursal</th>
+                                                        <th>Tipo de Cuenta</th>
+                                                        <th>Número de Cuenta</th>
+                                                        <th>CBU</th>
+                                                        <th>Seleccionar</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-if="depositoCtrl.liquidacion.CuentasBancarias.length == 0">
+                                                        <td colspan="6" class="text-center"><span>No se encontro la Cuenta Bancaria</span></td>
+                                                    </tr>
+                                                    <tr ng-repeat="cuentaBancaria in depositoCtrl.liquidacion.CuentasBancarias">
+                                                        <td>{{cuentaBancaria.Entidad}}</td>
+                                                        <td>{{cuentaBancaria.Sucursal}}</td>
+                                                        <td>{{cuentaBancaria.Tipo}}</td>
+                                                        <td>{{cuentaBancaria.Numero}}</td>
+                                                        <td>{{cuentaBancaria.CBU}}</td>
+                                                        <td class="text-center">
+                                                            <input type="radio" name="cuentaBancariaId" value="{{cuentaBancaria.Id}}" ng-model="depositoCtrl.liquidacion.CuentaBancariaId" ng-required="!depositoCtrl.liquidacion.CuentaBancariaId"/>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <p class="error" ng-if="depositoCtrl.depositoForm.$submitted && depositoCtrl.depositoForm.cuentaBancariaId.$error.required">Seleccione una cuenta bancaria destinataria.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!--ENTIDAD-->
+                                                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': depositoCtrl.validationErrors.elementErrors.Entidad}">
+                                                    <label class="col-sm-4 control-label">Entidad de Pago</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="entidad" class="form-control" placeholder="Entidad" ng-model="depositoCtrl.liquidacion.Entidad" required maxlength="100" />
+                                                    </div>
+                                                    <div class="col-sm-8 col-sm-offset-4">
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.entidad.$error.required">El campo Entidad es obligatorio.</p>
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.entidad.$error.maxlength">La longitud máxima del campo Entidad es de 100 caracteres.</p>
+                                                        <span class="help-block" ng-if="depositoCtrl.validationErrors.elementErrors.Entidad" ng-repeat="error in depositoCtrl.validationErrors.elementErrors.Entidad">
+                                                            {{error}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <!--SUCURSAL-->
+                                                <div class="form-group form-group-sm" ng-class="{'has-error': depositoCtrl.validationErrors.elementErrors.Sucursal}">
+                                                    <label class="col-sm-4 control-label">Sucursal de Pago</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="sucursal" class="form-control" placeholder="Sucursal" ng-model="depositoCtrl.liquidacion.Sucursal" maxlength="100" />
+                                                    </div>
+                                                    <div class="col-sm-8 col-sm-offset-4">
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.sucursal.$error.maxlength">La longitud máxima del campo Sucursal es de 100 caracteres.</p>
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.sucursal.$error.required">El campo Denominación es obligatorio.</p>
+                                                        <span class="help-block" ng-if="depositoCtrl.validationErrors.elementErrors.Sucursal" ng-repeat="error in depositoCtrl.validationErrors.elementErrors.Sucursal">
+                                                            {{error}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <!--CAJERO-->
+                                                <div class="form-group form-group-sm" ng-class="{'has-error': depositoCtrl.validationErrors.elementErrors.Cajero}">
+                                                    <label class="col-sm-4 control-label">Cajero</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="cajero" class="form-control" placeholder="Cajero" ng-model="depositoCtrl.liquidacion.Cajero" maxlength="40" />
+                                                    </div>
+                                                    <div class="col-sm-8 col-sm-offset-4">
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.cajero.$error.maxlength">La longitud máxima del campo Cajero es de 40 caracteres.</p>
+                                                        <!--<p class="help-block" ng-if="depositoCtrl.depositoForm.cajero.$error.required">El campo Denominación es obligatorio.</p>-->
+                                                        <span class="help-block" ng-if="depositoCtrl.validationErrors.elementErrors.Cajero" ng-repeat="error in depositoCtrl.validationErrors.elementErrors.Cajero">
+                                                            {{error}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!--FECHA DEPOSITO-->
+                                                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': depositoCtrl.validationErrors.elementErrors.FechaDeposito}">
+                                                    <label class="col-sm-4 control-label">Fecha Depósito</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="datetime" name="fechaDeposito" class="form-control" placeholder="Fecha Depósito" datetime-picker ng-model="depositoCtrl.liquidacion.FechaDeposito" required />
+                                                    </div>
+                                                    <div class="col-sm-8 col-sm-offset-4">
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.fechaDeposito.$error.required">El campo Fecha Depósito es obligatorio.</p>
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.fechaDeposito.$error.datetime">El campo Fecha Depósito es inválido. Solo se permiten fechas.</p>
+                                                        <span class="help-block" ng-if="depositoCtrl.validationErrors.elementErrors.FechaDeposito" ng-repeat="error in depositoCtrl.validationErrors.elementErrors.FechaDeposito">
+                                                            {{error}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <!--TRANSACCION NUMERO-->
+                                                <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': depositoCtrl.validationErrors.elementErrors.Transaccion}">
+                                                    <label class="col-sm-4 control-label">Transacción Nro.</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="number" name="numeroTransaccion" class="form-control" placeholder="Transacción Nro." ng-model="depositoCtrl.liquidacion.Transaccion" required />
+                                                    </div>
+                                                    <div class="col-sm-8 col-sm-offset-4">
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.numeroTransaccion.$error.required">El campo Transacción Nro. es obligatorio.</p>
+                                                        <p class="help-block" ng-if="depositoCtrl.depositoForm.numeroTransaccion.$error.number">El campo Transacción Nro. es inválido. Solo se permiten caracteres numéricos.</p>
+                                                        <span class="help-block" ng-if="depositoCtrl.validationErrors.elementErrors.Transaccion" ng-repeat="error in depositoCtrl.validationErrors.elementErrors.Transaccion">
+                                                            {{error}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                             </div>
+
+                                            <div class="col-md-12">
+                                                <!--Recibo-->
+                                                <div class="form-group form-group-sm">
+                                                    <label class="col-sm-4 control-label">Recibo PDF</label>
+                                                    <div class="col-sm-8">
+                                                        <input ngf-select="" ng-model="depositoCtrl.liquidacion.reciboDepositoFile" name="reciboDeposito" ngf-accept="'application/pdf'" type="file" required="">
+                                                    </div>
+                                                    <div class="col-sm-8 col-sm-offset-4">
+                                                        <p class="error" ng-show="depositoCtrl.depositoForm.$submitted && depositoCtrl.depositoForm.reciboDeposito.$error.required">Es obligatorio seleccionar un archivo.</p>
+                                                        <p class="error" ng-show="depositoCtrl.depositoForm.reciboDeposito.$error.invalidPDF">Es obligatorio seleccionar un archivo formato PDF.</p>
+                                                        <p class="error" ng-show="depositoCtrl.depositoForm.reciboDeposito.$error.invalidSize">Es obligatorio seleccionar un archivo menor a 5 MB.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                              </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+                <a href="#/DepositosAcreditacionesPendientes" class="btn btn-default">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+    <div ng-show="depositoCtrl.liquidacionInexistente">
+        <span class="text-danger">Deposito no encontrado.</span>
+    </div>
+</div>

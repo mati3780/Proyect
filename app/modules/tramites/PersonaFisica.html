@@ -1,0 +1,73 @@
+﻿<form name="personaFisicaCtrl.personaFisicaForm" class="form-horizontal" novalidate ng-submit="personaFisicaCtrl.aceptarPersonaFisica()">
+    <div class="col-sm-6">
+        <!--APELLIDO-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-4 control-label">Apellido</label>
+            <div class="col-sm-8">
+                <input type="text" name="apellido" class="form-control" placeholder="Apellido" ng-model="personaFisicaCtrl.personaFisica.Apellido" maxlength="100" ng-disabled="personaFisicaCtrl.action === 'DELETE'" />
+            </div>
+            <div class="col-sm-8 col-sm-offset-4">
+                <p class="help-block" ng-if="personaFisicaCtrl.personaFisicaForm.apellido.$error.maxlength">La longitud máxima del campo Apellido es de 100 caracteres.</p>
+            </div>
+        </div>
+        <!--TIPO DOC-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-4 control-label">Tipo Doc.</label>
+            <div class="col-sm-8">
+                <select class="form-control" name="tipoDocumento" ng-model="personaFisicaCtrl.personaFisica.TipoDocumento"
+                        ng-options="tipoDoc as tipoDoc.Descripcion for tipoDoc in personaFisicaCtrl.tipoDocumentos track by tipoDoc.Id"
+                        ng-disabled="personaFisicaCtrl.action === 'DELETE'">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-sm-8 col-sm-offset-4">
+            </div>
+        </div>
+        <!--CUIT-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-4 control-label">CUIT/CUIL</label>
+            <div class="col-sm-8">
+	            <input type="number" name="personaFisicaCuit" class="form-control" placeholder="CUIT/CUIL" ng-model="personaFisicaCtrl.personaFisica.Cuit" 
+					   cuit tooltip-placement="bottom" uib-tooltip="CUIT/CUIL (sin guiones ni espacios)" ng-disabled="personaFisicaCtrl.action === 'DELETE'"/>
+            </div>
+            <div class="col-sm-8 col-sm-offset-4">
+                <p class="help-block" ng-if="personaFisicaCtrl.personaFisicaForm.personaFisicaCuit.$error.number">El campo CUIT/CUIL. Solo se permiten caracteres numéricos.</p>
+                <p class="help-block" ng-if="personaFisicaCtrl.personaFisicaForm.personaFisicaCuit.$error.cuit">El campo CUIT/CUIL no contiene un CUIT/CUIL válido. Verifíquelo e ingréselo nuevamente</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <!--NOMBRE-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-4 control-label">Nombre</label>
+            <div class="col-sm-8">
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" ng-model="personaFisicaCtrl.personaFisica.Nombre" maxlength="100" ng-disabled="personaFisicaCtrl.action === 'DELETE'" />
+            </div>
+            <div class="col-sm-8 col-sm-offset-4">
+                <p class="help-block" ng-if="personaFisicaCtrl.personaFisicaForm.nombre.$error.maxlength">La longitud máxima del campo Nombre es de 100 caracteres.</p>
+            </div>
+        </div>
+        <!--NUM DOC-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-4 control-label">Número Doc.</label>
+            <div class="col-sm-8">
+                <input type="number" name="numeroDocumento" class="form-control" placeholder="Número Doc." ng-model="personaFisicaCtrl.personaFisica.NumeroDocumento" ng-disabled="personaFisicaCtrl.action === 'DELETE'"/>
+            </div>
+            <div class="col-sm-8 col-sm-offset-4">
+                <p class="help-block" ng-if="personaFisicaCtrl.personaFisicaForm.numeroDocumento.$error.number">El campo Orden en la Lista es inválido. Solo se permiten caracteres numéricos.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12" ng-if="personaFisicaCtrl.action !== 'POST'">
+        <!--OBSERVACION-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <label class="col-sm-2 control-label">Observación</label>
+            <div class="col-sm-10">
+                <textarea name="personaFisicaObservacion" rows="4" class="form-control" ng-model="personaFisicaCtrl.personaFisica.Observacion" required></textarea>
+            </div>
+            <div class="col-sm-10 col-sm-offset-2">
+                <p class="help-block" ng-if="personaFisicaCtrl.personaFisicaForm.personaFisicaObservacion.$error.required">El campo Observación es obligatorio.</p>
+            </div>
+        </div>
+    </div>
+</form>

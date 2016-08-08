@@ -1,0 +1,59 @@
+﻿<div>
+	<div ng-hide="contribucionCtrl.contribucionsinarepiInexistente">
+		<form name="contribucionCtrl.contribucionsinarepiForm" novalidate ng-submit="contribucionCtrl.guardar()" class="form-horizontal">
+			<div class="row alert alert-danger" ng-if="contribucionCtrl.validationErrors.formErrors.length > 0">
+				<ul>
+					<li ng-repeat="formError in contribucionCtrl.validationErrors.formErrors">
+						<span>{{formError}}</span>
+					</li>
+				</ul>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">Datos Principales</div>
+				<div class="panel-body">
+					<div class="col-sm-12">
+						<div class="form-group form-group-sm">
+							<label class="col-sm-2 control-label">Valor: </label>
+							<div class="col-sm-10">
+								<span>{{contribucionCtrl.contribucionsinarepi.Valor}}</span>
+							</div>
+						</div>
+
+					    <div class="form-group form-group-sm">
+					        <label class="col-sm-2 control-label">Fecha Desde: </label>
+					        <div class="col-sm-10">
+					            <span>{{contribucionCtrl.contribucionsinarepi.FechaDesde}}</span>
+					        </div>
+					    </div>
+
+					    <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': contribucionCtrl.validationErrors.elementErrors.FechaHasta}">
+					        <label class="col-sm-2 control-label">Fecha Hasta</label>
+					        <div class="input-group col-sm-2">
+					            <input type="text" name="FechaHasta" datetime-picker class="form-control" ng-model="contribucionCtrl.contribucionsinarepi.FechaHasta" aria-describedby="fecha-addon" required/>
+					            <span class="input-group-addon glyphicon glyphicon-calendar" style="margin-top: 0;" id="fecha-addon" aria-hidden="true"></span>
+					        </div>
+					        <div class="col-sm-10 col-sm-offset-2">
+					            <p class="help-block" ng-if="contribucionCtrl.contribucionsinarepiForm.FechaHasta.$error.required">El campo Fecha Hasta es obligatorio.</p>
+                                <p class="help-block" ng-if="contribucionCtrl.contribucionsinarepiForm.FechaHasta.$error.GreaterThanOrEqualTo">El campo Fecha Hasta debe ser mayor o igual que Fecha Desde.</p>
+					            <span class="help-block" ng-if="contribucionCtrl.validationErrors.elementErrors.FechaHasta" ng-repeat="error in contribucionCtrl.validationErrors.elementErrors.FechaHasta">
+                                    {{error}}
+                                </span>
+					        </div>
+					    </div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Guardar</button>
+				<a href="#/contribuciones" class="btn btn-link">Cancelar</a>
+			</div>
+		</form>
+	</div>
+	<div ng-show="contribucionCtrl.contribucionsinarepiInexistente">
+		<span class="text-danger">Contribución PROYECT no encontrada.</span>
+	</div>
+</div>

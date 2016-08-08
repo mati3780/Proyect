@@ -1,0 +1,49 @@
+﻿<div >
+    <div ng-hide="contribucionCtrl.contribucionsinarepiInexistente">
+        <form name="contribucionCtrl.contribucionsinarepiForm" novalidate ng-submit="contribucionCtrl.guardar()" class="form-horizontal">
+            <div class="row alert alert-danger" ng-if="contribucionCtrl.validationErrors.formErrors.length > 0">
+                <ul>
+                    <li ng-repeat="formError in contribucionCtrl.validationErrors.formErrors">
+                        <span>{{formError}}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Datos Principales</div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm" show-errors="{showSuccess: true}" ng-class="{'has-error': contribucionCtrl.validationErrors.elementErrors.Valor}">
+                            <label class="col-sm-3 control-label">Valor</label>
+                            <div class="input-group col-sm-5">
+                                <input name="valor" type="text" class="form-control" ng-model="contribucionCtrl.contribucionsinarepi.Valor" placeholder="Valor" required maxlength="10" pattern="\d*" />
+                            </div>
+                            <div class="col-sm-5 col-sm-offset-3">
+                                <p class="help-block" ng-if="contribucionCtrl.contribucionsinarepiForm.valor.$error.required">El campo Valor es obligatorio.</p>
+                                <p class="help-block" ng-if="contribucionCtrl.contribucionsinarepiForm.valor.$error.maxlength">El campo Valor no puede exceder los 10 caracteres.</p>
+                                <p class="help-block" ng-if="contribucionCtrl.contribucionsinarepiForm.valor.$error.pattern">'Valor' no tiene el formato correcto.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Fecha Desde: </label>
+                            <div class="col-sm-9">
+                                <span>{{contribucionCtrl.VigenciaFechaDesde}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" busy="<i class='fa fa-spinner fa-spin'></i> Guardando..." busy-disabled="true">Guardar</button>
+                <a href="#/contribuciones" class="btn btn-link">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <div ng-show="contribucionCtrl.contribucionsinarepiInexistente">
+        <span class="text-danger">Contribucion PROYECT no encontrada.</span>
+    </div>
+</div>

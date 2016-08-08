@@ -1,0 +1,14 @@
+﻿<form name="observarCtrl.observarForm" class="form-horizontal" novalidate ng-submit="observarCtrl.aceptarObservar()">
+    <div class="col-sm-12">
+        <!--OBSERVACION-->
+        <div class="form-group form-group-sm" show-errors="{showSuccess: true}">
+            <div class="col-sm-12">
+                <textarea name="observacion" rows="4" class="form-control" ng-model="observarCtrl.Observacion" required maxlength="1000"></textarea>
+            </div>
+            <div class="col-sm-12">
+                <p class="help-block" ng-if="observarCtrl.observarForm.observacion.$error.required">El campo es obligatorio.</p>
+                <p class="help-block" ng-if="observarCtrl.observarForm.observacion.$error.maxlength">La longitud máxima del campo es de 1000 caracteres.</p>
+            </div>
+        </div>
+    </div>
+</form>

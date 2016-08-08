@@ -1,0 +1,289 @@
+﻿<div>
+    <!--BUSCAR-->
+    <div class="row" ng-if="jurisdiccionesCtrl.esProyect">
+        <div class="panel panel-default">
+            <div class="panel-heading">Buscar Jurisdicciones</div>
+            <div class="panel-body">
+                <form class="form-horizontal" ng-if="jurisdiccionesCtrl.esProyect" ng-submit="jurisdiccionesCtrl.buscar()">
+                    <div class="col-md-4">
+                        <!--JURISDICCION-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Jurisdicción</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="jurisdiccion" placeholder="Jurisdicción" ng-model="jurisdiccionesCtrl.filtro.Jurisdiccion">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <!--PROVINCIA-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-3 control-label">Provincia</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="provincia" ng-model="jurisdiccionesCtrl.filtro.ProvinciaId"
+                                        ng-options="provincia.Id as provincia.Descripcion for provincia in jurisdiccionesCtrl.provincias">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <!--ESTADO ADHESION-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label">Estado Adhesión</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="tipoEstadoAdhesion" ng-model="jurisdiccionesCtrl.filtro.TipoEstadoAdhesionId"
+                                        ng-options="tipoEstadoAdhesion.Id as tipoEstadoAdhesion.Descripcion for tipoEstadoAdhesion in jurisdiccionesCtrl.tipoEstadoAdhesiones">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group form-group-sm text-right">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pull-right">
+        <a href="#/jurisdicciones/new" access="NuevaJurisdiccion" class="btn btn-primary"><i class="fa fa-plus"></i> Nueva Jurisdicción</a>
+    </div>
+
+    <!--GRILLA-->
+    <div class="row">
+        <table datatable="" dt-options="jurisdiccionesCtrl.dtOptions" dt-columns="jurisdiccionesCtrl.dtColumns" dt-instance="jurisdiccionesCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>
+    </div>
+
+    <!--MODAL VER-->
+    <script type="text/ng-template" id="modal.html">
+        <div class="modal-header bg-primary">
+            <button type="button" class="close" ng-click="jurisdiccionMD.close()" title="Cerrar">
+                <i class="fa fa-times"></i><span class="sr-only">Cerrar</span>
+            </button>
+            <h4 class="modal-title">Jurisdicción</h4>
+        </div>
+        <div class="modal-body">
+            <div ng-hide="jurisdiccionMD.jurisdiccionInexistente" class="container-fluid detalle form-horizontal">
+                <!--DATOS PRINCIPALES-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos Principales</div>
+                    <div class="panel-body">
+
+                        <div class="col-md-12">
+                            <!--DENOMINACION-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-3 control-label">Denominación</label>
+                                <div class="col-sm-9">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Descripcion}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!--SIGLA-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Sigla de Jurisdicción</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Sigla}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!--ORDEN-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Orden en la Lista</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Orden}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <!--NOMBRES-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-3 control-label">Nombres</label>
+                                <div class="col-sm-9">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Autoridad}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!--CUIT-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">CUIT/CUIL</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Cuit}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!--ESTADO-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Estado de Adhesión</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.TipoEstadoAdhesionDescripcion}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!--TELEFONO-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Teléfono</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Telefono}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!--RECIBIR CORREO-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Recibir Correo</label>
+                                <div class="col-sm-6">
+                                    <input type="checkbox" disabled="disabled" name="recibirMail" class="checkbox-inline" placeholder="Correo Electrónico" ng-model="controller.jurisdiccion.RecibirMail" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!--EMAIL1-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Correo Electrónico</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Email1}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!--EMAIL2-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Correo Electrónico 2</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Email2}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <!--URL-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-3 control-label">URL</label>
+                                <div class="col-sm-9">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Url}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--DOMICILIO-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Domicilio</div>
+                    <div class="panel-body">
+
+                        <div class="col-md-12">
+                            <!--DIRECCION-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-3 control-label">Dirección</label>
+                                <div class="col-sm-9">
+                                    <span>{{jurisdiccionMD.jurisdiccion.Direccion}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!--PROVINCIA-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Provincia</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.ProvinciaDescripcion}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!--LOCALIDAD-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Localidad</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.LocalidadDescripcion}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!--CODIGO POSTAL-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Código Postal</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.CodigoPostal}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!--GRUPO AD-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Grupo Active Directory</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.GrupoAd}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--PLAZOS-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Plazos</div>
+                    <div class="panel-body">
+
+                        <div class="col-md-6">
+                            <!--PLAZO OBSERVACION-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Plazo de Observación</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.PlazoObservacion}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!--PLAZO RETIRO-->
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-6 control-label">Plazo de retiro de Documentación</label>
+                                <div class="col-sm-6">
+                                    <span>{{jurisdiccionMD.jurisdiccion.PlazoRetiroDocumentacion}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--OBSERVACION-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Observación</div>
+                    <div class="panel-body">
+                        <!--OBSERVACION-->
+                        <div class="form-group form-group-sm">
+                            <div class="col-sm-12">
+                                <span>{{jurisdiccionMD.jurisdiccion.Observacion}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="jurisdiccionMD.jurisdiccion.jurisdiccionInexistente">
+                <span class="text-danger">Jurisdicción no encontrado.</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="jurisdiccionMD.close()">Cerrar</button>
+        </div>
+    </script>
+</div>

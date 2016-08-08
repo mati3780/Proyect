@@ -1,0 +1,48 @@
+﻿<div>
+	<div class="row pull-right">
+		<a href="#/contribuciones/new" access="NuevaContribucionPROYECT" ng-if="contribucionesCtrl.VigenciaFechaDesde" class="btn btn-primary">Nueva Contribucion PROYECT</a>
+	</div>
+	<div class="row" style="margin: 5px 0;"></div>
+	<div class="row">
+		<table datatable="" dt-options="contribucionesCtrl.dtOptions" dt-columns="contribucionesCtrl.dtColumns" dt-instance="contribucionesCtrl.dtInstance" class="row-border hover" style="width: 100%;"></table>
+	</div>
+
+    <script type="text/ng-template" id="modal.html">
+		<div class="modal-header bg-primary">
+			<button type="button" class="close" ng-click="contribucionsinarepiMD.close()" title="Cerrar">
+				<i class="fa fa-times"></i><span class="sr-only">Cerrar</span>
+			</button>
+			<h4 class="modal-title">Contribucion PROYECT Nro: {{contribucionsinarepiMD.contribucionsinarepi.Id}}</h4>
+		</div>
+		<div class="modal-body">
+			<div ng-hide="contribucionsinarepiMD.contribucionsinarepiInexistente" class="container-fluid detalle form-horizontal">
+				<div class="col-sm-6">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-4 control-label">Valor</label>
+                        <div class="col-sm-8">
+                            <span>{{contribucionsinarepiMD.contribucionsinarepi.Valor}}</span>
+                        </div>
+                    </div>
+					<div class="form-group form-group-sm">
+						<label class="col-sm-4 control-label">Fecha Desde</label>
+						<div class="col-sm-8">
+							<span>{{contribucionsinarepiMD.contribucionsinarepi.FechaDesde}}</span>
+						</div>
+					</div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-4 control-label">Fecha Hasta</label>
+                        <div class="col-sm-8">
+                            <span>{{contribucionsinarepiMD.contribucionsinarepi.FechaHasta}}</span>
+                        </div>
+                    </div>
+				</div>
+			</div>
+			<div ng-show="contribucionsinarepiMD.contribucionsinarepi.contribucionsinarepiInexistente">
+				<span class="text-danger">contribución no encontrado.</span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" ng-click="contribucionsinarepiMD.close()">Cerrar</button>
+		</div>
+	</script>
+</div>

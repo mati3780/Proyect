@@ -1,0 +1,61 @@
+﻿<div ng-controller="feriadosController as feriadosCtrl">
+	<div class="panel panel-default" ng-if="feriadosCtrl.VerFeriadosNacionales">
+		<div class="panel-heading">Feriados Nacionales</div>
+		<div class="panel-body">
+			<div class="col-md-12">
+				<div class="row pull-right">
+					<a href="#/feriados/new" access="PROYECT" class="btn btn-primary">Nuevo Feriado</a>
+				</div>
+				<div class="row">
+					<table datatable="" dt-options="feriadosCtrl.dtOptions" dt-columns="feriadosCtrl.dtColumnsPROYECT" dt-instance="feriadosCtrl.dtInstance" class="row-border hover" width="100%"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">Feriados Jurisdiccionales</div>
+		<div class="panel-body">
+			<div class="col-md-12">
+				<div class="pull-right">
+					<a href="#/feriados/new" access="NuevoFeriado" class="btn btn-primary">Nuevo Feriado</a>
+				</div>
+				<div class="row">
+					<table datatable="" dt-options="feriadosCtrl.dtOptionsJurisdiccionales" dt-columns="feriadosCtrl.dtColumns" dt-instance="feriadosCtrl.dtInstanceJurisdiccionales" class="row-border hover" width="100%"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/ng-template" id="modal.html">
+		<div class="modal-header bg-primary">
+			<button type="button" class="close" ng-click="feriadoMD.close()" title="Cerrar">
+				<i class="fa fa-times"></i><span class="sr-only">Cerrar</span>
+			</button>
+			<h4 class="modal-title">Feriado Nro: {{feriadoMD.feriado.Id}}</h4>
+		</div>
+		<div class="modal-body">
+			<div ng-hide="feriadoMD.feriadoInexistente" class="container-fluid detalle">
+				<div class="row form-group">
+					<div class="col-xs-6">
+						<label>Fecha: </label>
+						<span>{{feriadoMD.feriado.Fecha}}</span>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-xs-12">
+						<label>Descripción: </label>
+						<span>{{feriadoMD.feriado.Descripcion}}</span>
+					</div>
+				</div>
+			</div>
+			<div ng-show="feriadoMD.feriado.feriadoInexistente">
+				<span class="text-danger">Feriado no encontrado.</span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" ng-click="feriadoMD.close()">Cerrar</button>
+		</div>
+	</script>
+</div>
+
+
